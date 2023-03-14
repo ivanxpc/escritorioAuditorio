@@ -11,6 +11,7 @@
     </padding>
    <Label text="Proyecto Auditorio" />
    <Label text="Hola mundo Ivan !!" />
+   <Label text="Comentario Ivan" />
 
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="Hello!" />
