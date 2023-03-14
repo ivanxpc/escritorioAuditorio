@@ -12,6 +12,4 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    //hola
-    //ivan
 }
