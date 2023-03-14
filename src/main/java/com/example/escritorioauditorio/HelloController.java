@@ -1,6 +1,7 @@
 package com.example.escritorioauditorio;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class HelloController {
@@ -12,4 +13,6 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
+    @FXML
+    private Button gael;
 }
