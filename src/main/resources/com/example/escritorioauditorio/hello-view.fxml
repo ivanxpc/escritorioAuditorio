@@ -1,18 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="459.0" prefWidth="479.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <Label text="Proyecto Auditorio" />
-   <Label text="Hola mundo Ivan !!" />
-   <Label text="Comentario Gael" />
-
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Opciones ">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Otro">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutY="25.0" prefHeight="388.0" prefWidth="658.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <tabs>
+          <Tab text="Fechas Disponibles">
+               <content>
+                  <SplitPane prefHeight="456.0" prefWidth="658.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Label layoutX="210.0" layoutY="176.0" prefHeight="25.0" prefWidth="95.0" text="Mobiliario">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="419.0" layoutY="176.0" prefHeight="25.0" prefWidth="95.0" text="Personas">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="622.0" layoutY="172.0" prefHeight="25.0" prefWidth="95.0" text="Horario">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="25.0" prefHeight="25.0" prefWidth="187.0" text="Costo por evento">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="50.0" text="Internos: sin costo">
+                                 <font>
+                                    <Font name="Ebrima" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="67.0" text="Externos: 1,500" />
+                              <DatePicker fx:id="Calendario" layoutX="20.0" layoutY="215.0" prefHeight="25.0" prefWidth="148.0" />
+                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="622.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@logoTecMM.png" />
+                                 </image>
+                              </ImageView>
+                              <AnchorPane layoutX="191.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="198.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="1     Sillas (200)" AnchorPane.leftAnchor="14.0" />
+                                    <CheckBox fx:id="Sillas" layoutX="166.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <Label layoutX="14.0" layoutY="38.0" text="2     Tablones (8)" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="63.0" text="3     Mesas (2)" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="88.0" text="4     Microfonos (2)" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="24.0" layoutY="113.0" text="5     Podium" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="29.0" layoutY="139.0" text="6     Baños" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="24.0" layoutY="164.0" text="7     Agua" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="26.0" layoutY="189.0" text="8     Manteleria" AnchorPane.leftAnchor="14.0" />
+                                    <CheckBox fx:id="Tablones" layoutX="166.0" layoutY="38.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Mesas" layoutX="166.0" layoutY="63.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Microfonos" layoutX="166.0" layoutY="88.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Podium" layoutX="166.0" layoutY="113.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Baños" layoutX="166.0" layoutY="139.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Agua" layoutX="166.0" layoutY="164.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Manteleria" layoutX="166.0" layoutY="189.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="400.0" layoutY="201.0" prefHeight="127.0" prefWidth="200.0" AnchorPane.topAnchor="201.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="1     50 - 100" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="24.0" layoutY="38.0" text="2     100 - 200" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="23.6" layoutY="63.0" text="3     200 - 300" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="24.0" layoutY="87.0" text="4     300 - 500" AnchorPane.leftAnchor="14.0" />
+                                    <CheckBox fx:id="Personas1" layoutX="160.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.rightAnchor="27.0" />
+                                    <CheckBox fx:id="Personas2" layoutX="166.0" layoutY="38.0" mnemonicParsing="false" AnchorPane.rightAnchor="27.0" />
+                                    <CheckBox fx:id="Personas3" layoutX="166.0" layoutY="63.0" mnemonicParsing="false" AnchorPane.rightAnchor="27.0" />
+                                    <CheckBox fx:id="Personas4" layoutX="166.0" layoutY="87.0" mnemonicParsing="false" AnchorPane.rightAnchor="27.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="603.0" layoutY="197.0" prefHeight="135.0" prefWidth="200.0" AnchorPane.topAnchor="197.0">
+                                 <children>
+                                    <CheckBox fx:id="Horario1" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <Label layoutX="14.0" layoutY="14.0" text="1     30min - 1h" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="38.0" text="2     1:00h - 1:30h" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="61.0" text="3     1:30h - 2:00h" AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="85.0" text="4     Otro" AnchorPane.leftAnchor="14.0" />
+                                    <CheckBox fx:id="Horario2" layoutX="166.0" layoutY="38.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Horario3" layoutX="166.0" layoutY="61.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                    <CheckBox fx:id="Horario4" layoutX="166.0" layoutY="85.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
+                                 </children>
+                              </AnchorPane>
+                              <TextField fx:id="Nota" layoutX="407.0" layoutY="317.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
+                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" text="Aceptar" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </content>
+            </Tab>
+          <Tab text="PDF">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Folio">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
