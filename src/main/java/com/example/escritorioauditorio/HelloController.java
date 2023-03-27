@@ -44,4 +44,25 @@ public class HelloController {
     @FXML
     private CheckBox Horario4;
 
+    //PDF
+
+    @FXML
+    private Button descargar;
+    @FXML
+    private Button subir;
+
+    //Folio
+
+    @FXML
+    private TableView tabla;
+    @FXML
+    private TableColumn nombre;
+    @FXML
+    private TableColumn fPrestamo;
+    @FXML
+    private TableColumn nPersonas;
+    @FXML
+    private TableColumn folio;
+    @FXML
+    private TextField buscar;
 }

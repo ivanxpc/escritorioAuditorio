@@ -6,4 +6,5 @@ module com.example.escritorioauditorio {
 
     opens com.example.escritorioauditorio to javafx.fxml;
     exports com.example.escritorioauditorio;
+
 }

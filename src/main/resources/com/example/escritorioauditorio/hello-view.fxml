@@ -10,6 +10,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -72,9 +74,9 @@
                               </Label>
                               <Label layoutX="14.0" layoutY="67.0" text="Externos: 1,500" />
                               <DatePicker fx:id="Calendario" layoutX="20.0" layoutY="215.0" prefHeight="25.0" prefWidth="148.0" />
-                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="622.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="622.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="24.888198852539062" AnchorPane.topAnchor="-18.0">
                                  <image>
-                                    <Image url="@logoTecMM.png" />
+                                    <Image url="@image/logoTecMM.png" />
                                  </image>
                               </ImageView>
                               <AnchorPane layoutX="191.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="198.0">
@@ -122,7 +124,7 @@
                                  </children>
                               </AnchorPane>
                               <TextField fx:id="Nota" layoutX="407.0" layoutY="317.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
-                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" text="Aceptar" />
+                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" text="aceptar" />
                            </children>
                         </AnchorPane>
                      </items>
@@ -131,12 +133,48 @@
             </Tab>
           <Tab text="PDF">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="87.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/PDF.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="subir" layoutX="355.0" layoutY="410.0" mnemonicParsing="false" text="Subir " />
+                        <Button fx:id="descargar" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" text="Descargar" />
+                        <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="635.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                           <image>
+                              <Image url="@image/triangulosMorados.PNG" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Folio">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="523.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/buscar.PNG" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="buscar" layoutX="527.0" layoutY="76.0" style="-fx-background-color: transparent;" />
+                        <TableView fx:id="tabla" layoutX="31.0" layoutY="50.0" prefHeight="351.0" prefWidth="481.0">
+                          <columns>
+                            <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                            <TableColumn fx:id="fPrestamo" prefWidth="132.33334350585938" text="Fecha de prestamo" />
+                              <TableColumn fx:id="nPersonas" prefWidth="98.0" text="N° de personas" />
+                              <TableColumn fx:id="folio" prefWidth="174.0" text="Folio" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="591.0" layoutY="54.0" text="Buscar" />
+                        <ImageView fitHeight="215.0" fitWidth="228.0" layoutX="582.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@image/triangulosMorados.PNG" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
