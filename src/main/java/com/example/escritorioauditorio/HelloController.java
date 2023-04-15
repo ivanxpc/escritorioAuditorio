@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -556,16 +557,4 @@ public class HelloController {
 
         tabGeneral.getSelectionModel().select(2);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
