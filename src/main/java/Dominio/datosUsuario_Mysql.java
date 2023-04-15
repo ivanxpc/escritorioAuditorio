@@ -1,8 +1,6 @@
-package com.example.escritorioauditorio;
+package Dominio;
 
-import java.util.Date;
-
-public class datos_usuario {
+public class datosUsuario_Mysql {
 
     private int id;
     private String nombre;
@@ -14,19 +12,6 @@ public class datos_usuario {
     private String motivo;
     private String fecha;
     private String contacto;
-
-    public datos_usuario(int id, String nombre, String apellidoP, String apellidoM, String cargo, String area, String tipoSolicitante, String motivo, String fecha, String contacto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.cargo = cargo;
-        this.area = area;
-        this.tipoSolicitante = tipoSolicitante;
-        this.motivo = motivo;
-        this.fecha = fecha;
-        this.contacto = contacto;
-    }
 
     public int getId() {
         return id;

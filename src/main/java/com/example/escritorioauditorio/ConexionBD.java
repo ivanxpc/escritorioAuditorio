@@ -11,7 +11,7 @@ public class ConexionBD {
         try {
             if (c==null) {
                 String url = "jdbc:mysql://localhost:3306/auditorio";
-                c = DriverManager.getConnection(url, "root", "12345");
+                c = DriverManager.getConnection(url, "root", "");
             }
         }catch (Exception e){
             e.printStackTrace();

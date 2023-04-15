@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
         <menus>
@@ -39,9 +39,46 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane layoutY="25.0" prefHeight="388.0" prefWidth="658.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <TabPane fx:id="tabGeneral" layoutY="25.0" prefHeight="388.0" prefWidth="658.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <tabs>
-          <Tab text="Fechas Disponibles">
+            <Tab fx:id="folioTab" text="Folio">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="513.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/buscar.PNG" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="buscar" layoutX="517.0" layoutY="41.0" onKeyTyped="#buscarSolicitantes" style="-fx-background-color: transparent;" />
+                        <TableView fx:id="tabla" layoutX="21.0" layoutY="78.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0">
+                          <columns>
+                              <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                              <TableColumn fx:id="primerA" prefWidth="97.60000610351562" text="Primer apellido" />
+                              <TableColumn fx:id="segundoA" minWidth="9.600021362304688" prefWidth="107.99995422363281" text="Segundo apellido" />
+                              <TableColumn fx:id="cargo" minWidth="9.600021362304688" prefWidth="96.0" text="Cargo" />
+                              <TableColumn fx:id="area" minWidth="9.600021362304688" prefWidth="96.0" text="Area" />
+                              <TableColumn fx:id="tipoUsuario" minWidth="9.600021362304688" prefWidth="96.0" text="Tipo de usuario" />
+                              <TableColumn fx:id="contacto" minWidth="9.600021362304688" prefWidth="96.0" text="Contacto" />
+                              <TableColumn fx:id="motivo" minWidth="9.600021362304688" prefWidth="143.199951171875" text="Motivo" />
+                            <TableColumn fx:id="fPrestamo" prefWidth="121.5999755859375" text="Fecha de prestamo" />
+                              <TableColumn fx:id="nPersonas" minWidth="0.0" prefWidth="103.2000732421875" text="N° de personas" />
+                              <TableColumn fx:id="folio" minWidth="5.0" prefWidth="54.39990234375" text="Folio" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="577.0" layoutY="14.0" text="Buscar" />
+                        <ImageView fitHeight="215.0" fitWidth="228.0" layoutX="710.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@image/triangulosMorados.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="656.0" layoutY="14.0" text="Para continuar con la agenda, busca y selecciona una persona y presiona el boton de &quot;Continuar&quot;" />
+                        <Button fx:id="continuar" disable="true" layoutX="912.0" layoutY="41.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab fx:id="fechasDisponibles" text="Fechas Disponibles">
                <content>
                   <SplitPane prefHeight="456.0" prefWidth="658.0">
                      <items>
@@ -124,14 +161,14 @@
                                  </children>
                               </AnchorPane>
                               <TextField fx:id="Nota" layoutX="407.0" layoutY="317.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
-                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" text="aceptar" />
+                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="aceptar" />
                            </children>
                         </AnchorPane>
                      </items>
                   </SplitPane>
                </content>
             </Tab>
-          <Tab text="PDF">
+          <Tab fx:id="pdf" text="PDF">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -141,7 +178,7 @@
                            </image>
                         </ImageView>
                         <Button fx:id="subir" layoutX="355.0" layoutY="410.0" mnemonicParsing="false" text="Subir " />
-                        <Button fx:id="descargar" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" text="Descargar" />
+                        <Button fx:id="descargar" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" />
                         <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="635.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                            <image>
                               <Image url="@image/triangulosMorados.PNG" />
@@ -149,33 +186,6 @@
                         </ImageView>
                      </children></AnchorPane>
                </content>
-            </Tab>
-            <Tab text="Folio">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="523.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/buscar.PNG" />
-                           </image>
-                        </ImageView>
-                        <TextField fx:id="buscar" layoutX="527.0" layoutY="76.0" style="-fx-background-color: transparent;" />
-                        <TableView fx:id="tabla" layoutX="31.0" layoutY="50.0" prefHeight="351.0" prefWidth="481.0">
-                          <columns>
-                            <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                            <TableColumn fx:id="fPrestamo" prefWidth="132.33334350585938" text="Fecha de prestamo" />
-                              <TableColumn fx:id="nPersonas" prefWidth="98.0" text="N° de personas" />
-                              <TableColumn fx:id="folio" prefWidth="174.0" text="Folio" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="591.0" layoutY="54.0" text="Buscar" />
-                        <ImageView fitHeight="215.0" fitWidth="228.0" layoutX="582.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                           <image>
-                              <Image url="@image/triangulosMorados.PNG" />
-                           </image>
-                        </ImageView>
-                     </children></AnchorPane>
-              </content>
             </Tab>
         </tabs>
       </TabPane>

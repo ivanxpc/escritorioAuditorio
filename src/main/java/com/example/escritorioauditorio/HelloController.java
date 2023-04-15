@@ -1,9 +1,40 @@
 package com.example.escritorioauditorio;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.*;
+import java.util.logging.Logger;
 
 public class HelloController {
+    //TAB
+
+    @FXML
+    private Tab folioTab;
+    @FXML
+    private Tab pdf;
+    @FXML
+    private Tab fechasDisponibles;
+    @FXML
+    private TabPane tabGeneral;
 
     //Fechas Disponibles
 
@@ -56,7 +87,23 @@ public class HelloController {
     @FXML
     private TableView tabla;
     @FXML
+    private TableColumn id;
+    @FXML
     private TableColumn nombre;
+    @FXML
+    private TableColumn primerA;
+    @FXML
+    private TableColumn segundoA;
+    @FXML
+    private TableColumn cargo;
+    @FXML
+    private TableColumn area;
+    @FXML
+    private TableColumn tipoUsuario;
+    @FXML
+    private TableColumn contacto;
+    @FXML
+    private TableColumn motivo;
     @FXML
     private TableColumn fPrestamo;
     @FXML
@@ -65,4 +112,460 @@ public class HelloController {
     private TableColumn folio;
     @FXML
     private TextField buscar;
+    @FXML
+    private Button continuar;
+    @FXML
+    private Accordion accordionSolicitantes;
+
+    private datos_usuario temporalSolicitantes;
+
+    private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
+    Document documento = new Document();
+
+    public void initialize(){
+        actualizarDatos();
+
+    }
+
+    public void actualizarDatos(){
+
+        try {
+            Connection c = ConexionBD.getConexion();
+            Statement stm = c.createStatement();
+            String sql = "SELECT * FROM datosusuario";
+            ResultSet r = stm.executeQuery(sql);
+            bd_usuarioDatos.clear();
+            while (r.next()) {
+                tabla.setItems(bd_usuarioDatos);
+                bd_usuarioDatos.add(new datos_usuario(
+                        r.getInt("ID"),
+                        r.getString("Nombre"),
+                        r.getString("apellidoP"),
+                        r.getString("apellidoM"),
+                        r.getString("Cargo"),
+                        r.getString("Area"),
+                        r.getString("tipoSolicitante"),
+                        r.getString("Motivo"),
+                        r.getString("fecha"),
+                        r.getString("Contacto")));
+
+
+                id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                primerA.setCellValueFactory(new PropertyValueFactory<>("apellidoP"));
+                segundoA.setCellValueFactory(new PropertyValueFactory<>("apellidoM"));
+                cargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
+                area.setCellValueFactory(new PropertyValueFactory<>("area"));
+                tipoUsuario.setCellValueFactory(new PropertyValueFactory<>("tipoSolicitante"));
+                motivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
+                fPrestamo.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+                contacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+
+            }
+            stm.execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tabla.refresh();
+
+    }
+    @FXML
+    public void descargarArchivo ()  {
+
+
+        }
+
+
+
+    //Tab siguente
+    public void siguiente(){
+            tabGeneral.getSelectionModel().select(1);
+    }
+
+
+    //METODO PARA SELECCIONAR EN LA TABLA SOLICITANTES
+    int idSolicitantes;
+    @FXML
+    public void ClickTablaSolicitantes(MouseEvent evt){
+        if(evt.getClickCount() >= 2){
+                datos_usuario p = (datos_usuario) tabla.getSelectionModel().getSelectedItem();
+                temporalSolicitantes = p;
+                idSolicitantes = p.getId();
+            System.out.println("Se ha seleccionado el solicitante");
+            System.out.println("ID: " + p.getId());
+            continuar.setDisable(false);
+
+        }
+
+    }
+
+
+
+    //ACCION PARA BUSCAR
+
+    @FXML
+    public void buscarSolicitantes(KeyEvent evt) {
+        Connection c = ConexionBD.getConexion();
+        try {
+            Statement stm = c.createStatement();
+            String sql = "SELECT * FROM datosusuario WHERE nombre LIKE '" + buscar.getText() + "%'";
+            ResultSet r = stm.executeQuery(sql);
+            bd_usuarioDatos.clear();
+            while (r.next()) {
+                tabla.setItems(bd_usuarioDatos);
+                bd_usuarioDatos.add(new datos_usuario(
+                        r.getInt("ID"),
+                        r.getString("Nombre"),
+                        r.getString("apellidoP"),
+                        r.getString("apellidoM"),
+                        r.getString("Cargo"),
+                        r.getString("Area"),
+                        r.getString("tipoSolicitante"),
+                        r.getString("Motivo"),
+                        r.getString("fecha"),
+                        r.getString("Contacto")));
+
+                id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                primerA.setCellValueFactory(new PropertyValueFactory<>("apellidoP"));
+                segundoA.setCellValueFactory(new PropertyValueFactory<>("apellidoM"));
+                cargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
+                area.setCellValueFactory(new PropertyValueFactory<>("area"));
+                tipoUsuario.setCellValueFactory(new PropertyValueFactory<>("tipoSolicitante"));
+                motivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
+                fPrestamo.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+                contacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+            }
+            stm.execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void metodoGenerar_PDF() {
+        // documento = new Document(PageSize.A4, 35, 30 ,50 ,50);
+        Document documento = new Document();
+        //documento.setPageSize(PageSize.A4.rotate());
+        //documento.setMargins(15, 15, 15, 15);
+
+        try {
+
+
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Videos/Auditorio.pdf"));
+            //Insertar image
+
+            Image logo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
+            logo.scaleToFit(250,250);
+            logo.setAlignment(Chunk.ALIGN_CENTER);
+
+            Image bordo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
+            bordo.scaleToFit(300,300);
+            logo.setAlignment(Chunk.ALIGN_BOTTOM);
+
+            //Insertar texto
+            Paragraph parrafo = new Paragraph();
+            Paragraph contacto = new Paragraph();
+            Paragraph motivo = new Paragraph();
+            Paragraph fecha = new Paragraph();
+            Paragraph espacio = new Paragraph();
+            Paragraph separacion = new Paragraph();
+
+            //Moviliario
+            Paragraph mobiliario = new Paragraph();
+            Paragraph sillas = new Paragraph();
+            Paragraph tablones = new Paragraph();
+            Paragraph mesas = new Paragraph();
+            Paragraph microfonos = new Paragraph();
+            Paragraph podium = new Paragraph();
+            Paragraph banos = new Paragraph();
+            Paragraph agua = new Paragraph();
+            Paragraph manteleria = new Paragraph();
+
+            //Personas
+            Paragraph personas = new Paragraph();
+            Paragraph per50 = new Paragraph();
+            Paragraph per100 = new Paragraph();
+            Paragraph per200 = new Paragraph();
+            Paragraph per300 = new Paragraph();
+
+            //Horario
+            Paragraph horario = new Paragraph();
+            Paragraph h1 = new Paragraph();
+            Paragraph h2 = new Paragraph();
+            Paragraph h3 = new Paragraph();
+            Paragraph h4 = new Paragraph();
+
+            //Nota
+            Paragraph texto = new Paragraph();
+
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+            parrafo.add("Registro de agenda del auditorio \n\n");
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Datos del Solicitante: \n\n");
+
+            documento.open();
+            documento.add(logo);
+            documento.add(bordo);
+            documento.add(parrafo);
+
+
+            //PdfPTable tabla = new PdfPTable(5);
+
+            //tabla.SetWidths(values);
+
+            PdfPTable tabla = new PdfPTable(7);
+            float[] values = new float[7];
+            values[0] = 70;
+            values[1] = 200;
+            values[2] = 200;
+            values[3] = 200;
+
+            values[4] = 200;
+            values[5] = 200;
+            values[6] = 150;
+
+           /* values[7] = 250;
+            values[8] = 250;
+            values[9] = 250;*/
+            //values[10] = 75;
+
+            tabla.addCell("ID");
+            tabla.addCell("Nombre");
+            tabla.addCell("Primer Apellido");
+            tabla.addCell("Segundo Apellido");
+            tabla.addCell("Cargo");
+            tabla.addCell("Area");
+            tabla.addCell("Tipo de Usuario");
+            //tabla.addCell("Contacto");
+            //tabla.addCell("Motivo");
+            //tabla.addCell("Fecha de Prestamo");
+            tabla.setWidths(values);
+            //tabla.SetWidths(values);
+            // tabla.addCell("Numero de Personas");
+            //tabla.addCell("Folio");
+
+            try {
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auditorio","root","");
+                //PreparedStatement pst = cn.prepareStatement("SELECT * FROM datosusuario");
+                PreparedStatement pst = cn.prepareStatement("SELECT * FROM datosusuario WHERE id= " + idSolicitantes );
+
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()){
+
+                    do {
+
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(4));
+                        tabla.addCell(rs.getString(5));
+                        tabla.addCell(rs.getString(6));
+                        tabla.addCell(rs.getString(7));
+                        //tabla.addCell(rs.getString(10));
+                        //tabla.addCell(rs.getString(8));
+                        //tabla.addCell(rs.getString(9));
+                        espacio.add("\n" );
+                        contacto.add("                       Contacto:   "+rs.getString(10));
+                        motivo.add("                       Motivo:   "+rs.getString(8));
+                        fecha.add("                       Fecha de elaboracion de solicitud:   "+rs.getString(9));
+                        espacio.add("\n");
+
+                        //Moviliario
+                        mobiliario.add("                       Moviliario seleccionado:\n");
+                        if (Sillas.isSelected()) {
+                            sillas.add( "                       Sillas\n");
+                        }else if (Sillas.isDisabled()){
+
+                        }
+                        if (Tablones.isSelected()) {
+                            tablones.add( "                       Tablones\n");
+                        }else if (Tablones.isDisabled()){
+
+                        }
+                        if (Mesas.isSelected()) {
+                            mesas.add( "                       Mesas\n");
+                        }else if (Mesas.isDisabled()){
+
+                        }
+                        if (Microfonos.isSelected()) {
+                            microfonos.add( "                       Microfonos\n");
+                        }else if (Microfonos.isDisabled()){
+
+                        }
+                        if (Podium.isSelected()) {
+                            podium.add( "                       Podium\n");
+                        }else if (Podium.isDisabled()){
+
+                        }
+                        if (Baños.isSelected()) {
+                            banos.add( "                       Baños\n");
+                        }else if (Baños.isDisabled()){
+
+                        }
+                        if (Agua.isSelected()) {
+                            agua.add( "                       Agua\n");
+                        }else if (Agua.isDisabled()){
+
+                        }
+                        if (Manteleria.isSelected()) {
+                            manteleria.add( "                       Manteleria\n");
+                        }else if (Manteleria.isDisabled()){
+
+                        }
+
+
+
+                        //espacio.add("\n");
+
+                        //Personas
+                        personas.add("                       Cantidad de personas: \n");
+                        if (Personas1.isSelected()) {
+                            per50.add( "                        50 - 100 \n");
+                        }else if (Personas1.isDisabled()){
+
+                        }
+                        if (Personas2.isSelected()) {
+                            per100.add( "                       100 - 200 \n");
+                        }else if (Personas2.isDisabled()){
+
+                        }
+                        if (Personas3.isSelected()) {
+                            per200.add( "                       200 - 300 \n");
+                        }else if (Personas3.isDisabled()){
+
+                        }
+                        if (Personas4.isSelected()) {
+                            per300.add( "                       300 - 500 \n");
+                        }else if (Personas4.isDisabled()){
+
+                        }
+
+                        //espacio.add("\n");
+
+
+                        //Horario
+                        horario.add("                       Duracion del evento: \n");
+                        if (Horario1.isSelected()) {
+                            h1.add( "                        30min - 1h \n");
+                        }else if (Horario1.isDisabled()){
+
+                        }
+                        if (Horario2.isSelected()) {
+                            h2.add( "                        1:00h - 1:30h \n");
+                        }else if (Horario2.isDisabled()){
+
+                        }
+                        if (Horario3.isSelected()) {
+                            h3.add( "                        1:30h - 2:00h \n");
+                        }else if (Horario3.isDisabled()){
+
+                        }
+                        if (Horario4.isSelected()) {
+                            h4.add( "                        otro \n");
+                        }else if (Horario4.isDisabled()){
+
+                        }
+                        separacion.add("                       ------------------------------------ \n");
+
+                        //Nota
+                        texto.add("                        Descripcion de otro elemento extra: "+Nota.getText());
+
+                        //parrafo.add(rs.getString(8));
+                        //tabla.addCell(rs.getString(11));
+                        //tabla.addCell(rs.getString(12));
+                    }while (rs.next());
+                    documento.add(tabla);
+                    documento.add(espacio);
+                    documento.add(contacto);
+                    documento.add(motivo);
+                    documento.add(fecha);
+                    documento.add(espacio);
+                    documento.add(separacion);
+
+                    documento.add(mobiliario);
+                    documento.add(sillas);
+                    documento.add(tablones);
+                    documento.add(mesas);
+                    documento.add(microfonos);
+                    documento.add(podium);
+                    documento.add(banos);
+                    documento.add(agua);
+                    documento.add(manteleria);
+                    //documento.add(espacio);
+                    documento.add(separacion);
+
+
+                    documento.add(personas);
+                    documento.add(per50);
+                    documento.add(per100);
+                    documento.add(per200);
+                    documento.add(per300);
+                    //documento.add(espacio);
+                    documento.add(separacion);
+
+                    documento.add(horario);
+                    documento.add(h1);
+                    documento.add(h2);
+                    documento.add(h3);
+                    documento.add(h4);
+                    documento.add(separacion);
+
+                    documento.add(texto);
+                    documento.add(separacion);
+
+
+                }
+
+            }catch (DocumentException | SQLException e){
+                System.out.println("Error en generar PDF" + e);
+            }
+
+            documento.close();
+            System.out.println("Documento creado");
+            try {
+                Stage stage = new Stage();//Crear una nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("crearPDF.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("Finalizado");
+                stage.setScene(escena);//agregar la esena a la ventana
+                stage.showAndWait();
+            } catch (Exception d){
+
+            }
+
+        }catch (DocumentException | FileNotFoundException e){
+
+            try {
+                Stage stage = new Stage();//Crear una nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("error_PDF.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("ERROR");
+                stage.setScene(escena);//agregar la esena a la ventana
+                stage.showAndWait();
+            } catch (Exception d){
+
+            }
+            System.out.println("Error en generar PDFfffff" + e);
+
+        }catch (IOException e){
+            System.out.println("Error en la imagen" + e);
+        }
+
+        tabGeneral.getSelectionModel().select(2);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
