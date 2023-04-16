@@ -14,8 +14,9 @@ public class datos_usuario {
     private String motivo;
     private String fecha;
     private String contacto;
+    private String fechaAgenda;
 
-    public datos_usuario(int id, String nombre, String apellidoP, String apellidoM, String cargo, String area, String tipoSolicitante, String motivo, String fecha, String contacto) {
+    public datos_usuario(int id, String nombre, String apellidoP, String apellidoM, String cargo, String area, String tipoSolicitante, String motivo, String fecha, String contacto, String fechaAgenda) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -26,6 +27,7 @@ public class datos_usuario {
         this.motivo = motivo;
         this.fecha = fecha;
         this.contacto = contacto;
+        this.fechaAgenda = fechaAgenda;
     }
 
     public int getId() {
@@ -106,5 +108,13 @@ public class datos_usuario {
 
     public void setContacto(String contacto) {
         this.contacto = contacto;
+    }
+
+    public String getFechaAgenda() {
+        return fechaAgenda;
+    }
+
+    public void setFechaAgenda(String fechaAgenda) {
+        this.fechaAgenda = fechaAgenda;
     }
 }

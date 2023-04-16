@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
         <menus>
@@ -34,7 +34,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Otro">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cerrar sesión" />
+              <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
@@ -50,10 +50,10 @@
                               <Image url="@image/buscar.PNG" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="buscar" layoutX="517.0" layoutY="41.0" onKeyTyped="#buscarSolicitantes" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="buscar" layoutX="517.0" layoutY="41.0" onAction="#buscarSolicitantes" style="-fx-background-color: transparent;" />
                         <TableView fx:id="tabla" layoutX="21.0" layoutY="78.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0">
                           <columns>
-                              <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="id" prefWidth="75.0" text="Folio" />
                             <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
                               <TableColumn fx:id="primerA" prefWidth="97.60000610351562" text="Primer apellido" />
                               <TableColumn fx:id="segundoA" minWidth="9.600021362304688" prefWidth="107.99995422363281" text="Segundo apellido" />
@@ -61,10 +61,9 @@
                               <TableColumn fx:id="area" minWidth="9.600021362304688" prefWidth="96.0" text="Area" />
                               <TableColumn fx:id="tipoUsuario" minWidth="9.600021362304688" prefWidth="96.0" text="Tipo de usuario" />
                               <TableColumn fx:id="contacto" minWidth="9.600021362304688" prefWidth="96.0" text="Contacto" />
-                              <TableColumn fx:id="motivo" minWidth="9.600021362304688" prefWidth="143.199951171875" text="Motivo" />
-                            <TableColumn fx:id="fPrestamo" prefWidth="121.5999755859375" text="Fecha de prestamo" />
-                              <TableColumn fx:id="nPersonas" minWidth="0.0" prefWidth="103.2000732421875" text="N° de personas" />
-                              <TableColumn fx:id="folio" minWidth="5.0" prefWidth="54.39990234375" text="Folio" />
+                              <TableColumn fx:id="motivo" minWidth="9.600021362304688" prefWidth="154.39996337890625" text="Motivo" />
+                            <TableColumn fx:id="fPrestamo" prefWidth="141.5999755859375" text="Fecha de tramite" />
+                              <TableColumn fx:id="fAgenda" minWidth="0.0" prefWidth="128.7999267578125" text="Fecha de agenda " />
                           </columns>
                         </TableView>
                         <Label layoutX="577.0" layoutY="14.0" text="Buscar" />
@@ -161,7 +160,7 @@
                                  </children>
                               </AnchorPane>
                               <TextField fx:id="Nota" layoutX="407.0" layoutY="317.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
-                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="aceptar" />
+                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="Agendar" />
                            </children>
                         </AnchorPane>
                      </items>

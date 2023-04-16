@@ -44,6 +44,8 @@ public class HelloController {
     @FXML
     private DatePicker Calendario;
     @FXML
+    private Button btn_Agendar;
+    @FXML
     private CheckBox Sillas;
     @FXML
     private CheckBox Tablones;
@@ -108,7 +110,7 @@ public class HelloController {
     @FXML
     private TableColumn fPrestamo;
     @FXML
-    private TableColumn nPersonas;
+    private TableColumn fAgenda;
     @FXML
     private TableColumn folio;
     @FXML
@@ -148,7 +150,8 @@ public class HelloController {
                         r.getString("tipoSolicitante"),
                         r.getString("Motivo"),
                         r.getString("fecha"),
-                        r.getString("Contacto")));
+                        r.getString("Contacto"),
+                        r.getString("fechaAgenda")));
 
 
                 id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -161,6 +164,7 @@ public class HelloController {
                 motivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
                 fPrestamo.setCellValueFactory(new PropertyValueFactory<>("fecha"));
                 contacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+                fAgenda.setCellValueFactory(new PropertyValueFactory<>("fechaAgenda"));
 
             }
             stm.execute(sql);
@@ -199,6 +203,27 @@ public class HelloController {
         }
 
     }
+/*
+    @FXML
+    public void agreagarFecha_Agenda(ActionEvent evt){
+        try {
+            Connection c = ConexionBD.getConexion();
+            Statement stm = c.createStatement();
+            //UPDATE datosusuario SET fechaAgenda = "2023/04/23" WHERE id = 3
+            String sql = "UPDATE datosusuario SET fechaAgenda = '"+ Calendario.getValue() + "'  WHERE id = " + idSolicitantes;
+            System.out.println("DATOS INSERTADOS");
+            stm.execute(sql);
+            //Se lo agrege stm.close****
+            stm.close();
+            actualizarDatos();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e+ "No se inserto datos!!\n");
+        }
+
+    }
+*/
+
 
 
 
@@ -224,7 +249,9 @@ public class HelloController {
                         r.getString("tipoSolicitante"),
                         r.getString("Motivo"),
                         r.getString("fecha"),
-                        r.getString("Contacto")));
+                        r.getString("Contacto"),
+                        r.getString("fechaAgenda")));
+
 
                 id.setCellValueFactory(new PropertyValueFactory<>("id"));
                 nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -236,6 +263,7 @@ public class HelloController {
                 motivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
                 fPrestamo.setCellValueFactory(new PropertyValueFactory<>("fecha"));
                 contacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+                fAgenda.setCellValueFactory(new PropertyValueFactory<>("fechaAgenda"));
             }
             stm.execute(sql);
         } catch (Exception e) {
@@ -249,6 +277,20 @@ public class HelloController {
         Document documento = new Document();
         //documento.setPageSize(PageSize.A4.rotate());
         //documento.setMargins(15, 15, 15, 15);
+        try {
+            Connection c = ConexionBD.getConexion();
+            Statement stm = c.createStatement();
+            //UPDATE datosusuario SET fechaAgenda = "2023/04/23" WHERE id = 3
+            String sql = "UPDATE datosusuario SET fechaAgenda = '"+ Calendario.getValue() + "'  WHERE id = " + idSolicitantes;
+            System.out.println("DATOS INSERTADOS");
+            stm.execute(sql);
+            //Se lo agrege stm.close****
+            stm.close();
+            actualizarDatos();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e+ "No se inserto datos!!\n");
+        }
 
         try {
 
@@ -301,8 +343,12 @@ public class HelloController {
             //Nota
             Paragraph texto = new Paragraph();
 
+            //datepiker
+
+            Paragraph fechaDP = new Paragraph();
+
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
-            parrafo.add("Registro de agenda del auditorio \n\n");
+            parrafo.add("Registro Agenda del Auditorio \n\n");
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
             parrafo.add("Datos del Solicitante: \n\n");
 
@@ -316,8 +362,8 @@ public class HelloController {
 
             //tabla.SetWidths(values);
 
-            PdfPTable tabla = new PdfPTable(7);
-            float[] values = new float[7];
+            PdfPTable tabla = new PdfPTable(8);
+            float[] values = new float[8];
             values[0] = 70;
             values[1] = 200;
             values[2] = 200;
@@ -326,6 +372,7 @@ public class HelloController {
             values[4] = 200;
             values[5] = 200;
             values[6] = 150;
+            values[7] = 150;
 
            /* values[7] = 250;
             values[8] = 250;
@@ -339,6 +386,7 @@ public class HelloController {
             tabla.addCell("Cargo");
             tabla.addCell("Area");
             tabla.addCell("Tipo de Usuario");
+            tabla.addCell("Folio");
             //tabla.addCell("Contacto");
             //tabla.addCell("Motivo");
             //tabla.addCell("Fecha de Prestamo");
@@ -365,6 +413,7 @@ public class HelloController {
                         tabla.addCell(rs.getString(5));
                         tabla.addCell(rs.getString(6));
                         tabla.addCell(rs.getString(7));
+                        tabla.addCell(rs.getString(1));
                         //tabla.addCell(rs.getString(10));
                         //tabla.addCell(rs.getString(8));
                         //tabla.addCell(rs.getString(9));
@@ -372,6 +421,7 @@ public class HelloController {
                         contacto.add("                       Contacto:   "+rs.getString(10));
                         motivo.add("                       Motivo:   "+rs.getString(8));
                         fecha.add("                       Fecha de elaboracion de solicitud:   "+rs.getString(9));
+                        fechaDP.add("                       Fecha de Agenda:   " + rs.getString(11));
                         espacio.add("\n");
 
                         //Moviliario
@@ -450,22 +500,22 @@ public class HelloController {
                         //Horario
                         horario.add("                       Duracion del evento: \n");
                         if (Horario1.isSelected()) {
-                            h1.add( "                        30min - 1h \n");
+                            h1.add( "                       30min - 1h \n");
                         }else if (Horario1.isDisabled()){
 
                         }
                         if (Horario2.isSelected()) {
-                            h2.add( "                        1:00h - 1:30h \n");
+                            h2.add( "                       1:00h - 1:30h \n");
                         }else if (Horario2.isDisabled()){
 
                         }
                         if (Horario3.isSelected()) {
-                            h3.add( "                        1:30h - 2:00h \n");
+                            h3.add( "                       1:30h - 2:00h \n");
                         }else if (Horario3.isDisabled()){
 
                         }
                         if (Horario4.isSelected()) {
-                            h4.add( "                        otro \n");
+                            h4.add( "                       otro \n");
                         }else if (Horario4.isDisabled()){
 
                         }
@@ -483,6 +533,7 @@ public class HelloController {
                     documento.add(contacto);
                     documento.add(motivo);
                     documento.add(fecha);
+                    documento.add(fechaDP);
                     documento.add(espacio);
                     documento.add(separacion);
 
@@ -526,6 +577,7 @@ public class HelloController {
 
             documento.close();
             System.out.println("Documento creado");
+
             try {
                 Stage stage = new Stage();//Crear una nueva ventana
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("crearPDF.fxml"));
@@ -549,6 +601,8 @@ public class HelloController {
             } catch (Exception d){
 
             }
+
+
             System.out.println("Error en generar PDFfffff" + e);
 
         }catch (IOException e){
@@ -556,5 +610,8 @@ public class HelloController {
         }
 
         tabGeneral.getSelectionModel().select(2);
+
+
+
     }
 }
