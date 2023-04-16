@@ -11,6 +11,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -145,14 +146,11 @@ public class generarPDF {
         }
     }
 
-
     public static void main(String[] args) {
 
         generarPDF generar = new generarPDF();
 
         generar.metodoGenerar_PDF();
+
     }
-
-
-
 }

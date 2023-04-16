@@ -16,15 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.*;
-import java.util.logging.Logger;
-
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 public class HelloController {
     //TAB
 
@@ -175,12 +169,22 @@ public class HelloController {
 
     }
     @FXML
-    public void descargarArchivo ()  {
+    public void descargarArchivo()throws Exception {
 
+        String File_name = "C:\\Users\\omara\\OneDrive\\Escritorio\\Formulario.pdf";
+
+        Image imagen = Image.getInstance("C:\\Users\\omara\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
+        imagen.scaleToFit(600,1100);
+        imagen.setAlignment(Chunk.ALIGN_JUSTIFIED);
+
+        Document Descarga_PDF = new Document();
+        PdfWriter.getInstance(Descarga_PDF, new FileOutputStream(File_name));
+
+        Descarga_PDF.open();
+        Descarga_PDF.add(imagen);
+        Descarga_PDF.close();
 
         }
-
-
 
     //Tab siguente
     public void siguiente(){

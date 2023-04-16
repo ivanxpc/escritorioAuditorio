@@ -38,7 +38,6 @@ public class loginController {
             stage.setScene(escena);
             stage.show();
         }else{
-            System.out.println("NO SE ENCONTRO EL USUARIO");
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
             stage.setTitle("ERROR");
