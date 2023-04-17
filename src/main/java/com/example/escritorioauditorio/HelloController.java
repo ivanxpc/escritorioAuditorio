@@ -276,7 +276,7 @@ public class HelloController {
 
 
         } catch (AddressException ex) {
-            System.out.println("Error enel correo" + ex);
+            System.out.println("Error en el correo" + ex);
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
         } catch (MessagingException ex) {
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
