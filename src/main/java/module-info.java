@@ -6,6 +6,8 @@ module com.example.escritorioauditorio {
     requires firebase.admin;
     requires com.google.auth.oauth2;
     requires itextpdf;
+    requires mail;
+    requires activation;
 
 
     opens com.example.escritorioauditorio to javafx.fxml;

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
         <menus>
@@ -74,6 +74,7 @@
                         </ImageView>
                         <Label layoutX="656.0" layoutY="14.0" text="Para continuar con la agenda, busca y selecciona una persona y presiona el boton de &quot;Continuar&quot;" />
                         <Button fx:id="continuar" disable="true" layoutX="912.0" layoutY="41.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" />
+                        <Button layoutX="21.0" layoutY="29.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -176,13 +177,14 @@
                               <Image url="@image/PDF.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="subir" layoutX="355.0" layoutY="410.0" mnemonicParsing="false" text="Subir " />
+                        <Button fx:id="subir" layoutX="228.0" layoutY="410.0" mnemonicParsing="false" onAction="#adjuntarArchivo" text="Enviar" />
                         <Button fx:id="descargar" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" />
                         <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="635.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                            <image>
                               <Image url="@image/triangulosMorados.PNG" />
                            </image>
                         </ImageView>
+                        <Button fx:id="adjuntar" layoutX="315.0" layoutY="410.0" mnemonicParsing="false" onAction="#testFile" text="Adjuntar" />
                      </children></AnchorPane>
                </content>
             </Tab>

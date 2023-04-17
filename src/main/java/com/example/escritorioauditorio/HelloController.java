@@ -13,10 +13,22 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.*;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 public class HelloController {
@@ -78,6 +90,8 @@ public class HelloController {
     private Button descargar;
     @FXML
     private Button subir;
+    @FXML
+    private Button adjuntar;
 
     //Folio
 
@@ -108,6 +122,8 @@ public class HelloController {
     @FXML
     private TableColumn folio;
     @FXML
+    private Button actualizarS;
+    @FXML
     private TextField buscar;
     @FXML
     private Button continuar;
@@ -122,6 +138,10 @@ public class HelloController {
     public void initialize(){
         actualizarDatos();
 
+    }
+    @FXML
+    public void actualizarSolicitantes(){
+        actualizarDatos();
     }
 
     public void actualizarDatos(){
@@ -170,10 +190,14 @@ public class HelloController {
     }
     @FXML
     public void descargarArchivo()throws Exception {
+        //Esta es mi dirrrecion de Ivan PC
+        //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
+        String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
-        String File_name = "C:\\Users\\omara\\OneDrive\\Escritorio\\Formulario.pdf";
 
-        Image imagen = Image.getInstance("C:\\Users\\omara\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
+        //Esta es mi dirrrecion de Ivan PC
+        //Image imagen = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
+        Image imagen = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
         imagen.scaleToFit(600,1100);
         imagen.setAlignment(Chunk.ALIGN_JUSTIFIED);
 
@@ -184,11 +208,201 @@ public class HelloController {
         Descarga_PDF.add(imagen);
         Descarga_PDF.close();
 
+        try {
+            Stage stage = new Stage();//Crear una nueva ventana
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("descargaPDF.fxml"));
+            Scene escena = new Scene(loader.load());
+            stage.setTitle("Finalizado");
+            stage.setScene(escena);//agregar la esena a la ventana
+            stage.showAndWait();
+        } catch (Exception d){
+
+        }
+
         }
 
     //Tab siguente
     public void siguiente(){
             tabGeneral.getSelectionModel().select(1);
+    }
+
+    //Metodo para enviar los archivos por correo
+    public void enviarArechivos(){
+        try {
+            Properties propiedades = new Properties();
+            /*
+            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedades.setProperty("mail.smtp.starttls.enable", "true");
+            propiedades.setProperty("mail.smtp.port", "587");
+            propiedades.setProperty("mail.smtp.auth", "true");
+
+             */
+            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedades.setProperty("mail.smtp.port", "465");
+            propiedades.setProperty("mail.smtp.auth", "true");
+            propiedades.setProperty("mail.smtp.starttls.enable", "true");
+            propiedades.setProperty("mail.smtp.starttls.required", "true");
+            propiedades.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+            propiedades.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+            Session sesion = Session.getDefaultInstance(propiedades);
+
+            String correo_emisor = "ipadillacordova@gmail.com";
+            String password_emisor = "rideprwxpzwbjpqc";
+
+            //String correo_receptor = "ch200110782@chapala.tecmm.edu.mx";
+            /*String correo_receptor = "ipadillacordova@gmail.com";
+
+            String mensaje = "Hola me llamo Ivan Padilla ";
+            String asunto = "Esto es una prueba";
+
+             */
+            String correo_receptor = "ipadillacordova@gmail.com";
+            String asunto = "Java";
+            String mensaje = "Hola , me llamo christian Ramirez";
+
+            MimeMessage message = new MimeMessage(sesion);
+            message.setFrom(new InternetAddress(correo_emisor));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+            message.setSubject(asunto);
+            message.setText(mensaje);
+
+            Transport transporte = sesion.getTransport("smtp");
+            transporte.connect(correo_emisor,password_emisor);
+            transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+
+            System.out.println("El mensaje se ha enviado  . ");
+
+
+        } catch (AddressException ex) {
+            System.out.println("Error enel correo" + ex);
+            //JOptionPane.showMessageDialog(null,"Error : " +ex);
+        } catch (MessagingException ex) {
+            //JOptionPane.showMessageDialog(null,"Error : " +ex);
+            System.out.println("Error en el mensaje" + ex);
+        }
+
+    }
+
+File datos;
+    @FXML
+    public void testFile(){
+
+
+        File archivo = new File("Archivos");
+        System.out.println(archivo.getAbsolutePath());
+        System.out.println(archivo.exists());
+
+        FileChooser fileChooser = new FileChooser();
+         datos = fileChooser.showOpenDialog(null);
+
+        fileChooser.setTitle("Buscar archivo");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("archivos de texto", "*.pdf"));
+        //File ruta = new File(String.valueOf(fileChooser));
+
+
+        if (datos == null) {
+            System.out.println("No has seleccionado ningun archivo");
+
+
+        }
+        System.out.println(datos);
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(datos);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        /*try {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Buscar archivo");
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("archivos de texto", "*.pdf"));
+        }catch (Exception e){
+            System.out.println("Error" + e);
+        }
+
+         */
+    }
+
+    @FXML
+    public void adjuntarArchivo(){
+
+        try {
+            Properties propiedades = new Properties();
+
+
+            /*
+            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedades.setProperty("mail.smtp.starttls.enable", "true");
+            propiedades.setProperty("mail.smtp.port", "587");
+            propiedades.setProperty("mail.smtp.auth", "true");
+
+             */
+            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedades.setProperty("mail.smtp.port", "465");
+            propiedades.setProperty("mail.smtp.auth", "true");
+            propiedades.setProperty("mail.smtp.starttls.enable", "true");
+            propiedades.setProperty("mail.smtp.starttls.required", "true");
+            propiedades.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+            propiedades.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+            Session sesion = Session.getDefaultInstance(propiedades);
+
+            String correo_emisor = "ipadillacordova@gmail.com";
+            String password_emisor = "rideprwxpzwbjpqc";
+
+            //String correo_receptor = "ch200110782@chapala.tecmm.edu.mx";
+            /*String correo_receptor = "ipadillacordova@gmail.com";
+
+            String mensaje = "Hola me llamo Ivan Padilla ";
+            String asunto = "Esto es una prueba";
+
+             */
+            String correo_receptor = "ipadillacordova@gmail.com";
+            String asunto = "Archivos del Solicitante";
+            //String mensaje = "Hola , me llamo christian Ramirez";
+            String mensaje = "Solicitud y formulario <br> Auditorio Tec de Chapala <br> <i>Esto es una prueba</i>";
+
+            BodyPart texto = new MimeBodyPart();
+            texto.setContent(mensaje,"text/html");
+
+            BodyPart adjuntos = new MimeBodyPart();
+            //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
+            adjuntos.setDataHandler(new DataHandler(new FileDataSource(datos)));
+            adjuntos.setFileName("Archivo.pdf");
+            //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
+            System.out.println("Archivo adjuntado!!");
+            MimeMultipart partes = new MimeMultipart();
+            partes.addBodyPart(texto);
+            partes.addBodyPart(adjuntos);
+
+            MimeMessage message = new MimeMessage(sesion);
+            message.setFrom(new InternetAddress(correo_emisor));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+            message.setSubject(asunto);
+            //message.setText(mensaje);
+            message.setContent(partes);
+
+            Transport transporte = sesion.getTransport("smtp");
+            transporte.connect(correo_emisor,password_emisor);
+            transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
+            transporte.close();
+
+            System.out.println("El mensaje se ha enviado  . ");
+
+
+        } catch (AddressException ex) {
+            System.out.println("Error enel correo" + ex);
+            //JOptionPane.showMessageDialog(null,"Error : " +ex);
+        } catch (MessagingException ex) {
+            //JOptionPane.showMessageDialog(null,"Error : " +ex);
+            System.out.println("Error en el mensaje" + ex);
+        }
+
     }
 
 
