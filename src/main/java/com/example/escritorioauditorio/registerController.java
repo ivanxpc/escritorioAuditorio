@@ -30,8 +30,9 @@ public class registerController {
         Pattern patron_correo, patron_usuario, patron_contraseña;
         Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        patron_correo = Pattern.compile("(.*@[g][m][a][i][l][.][c][o][m])||" +
-                "                        (.*@[c][h][a][p][a][l][a][.][t][e][c][m][m][.][e][d][u][.][m][x])");
+        //patron_correo = Pattern.compile("(.*@[g][m][a][i][l][.][c][o][m])||" +
+               // "                        (.*@[c][h][a][p][a][l][a][.][t][e][c][m][m][.][e][d][u][.][m]x)");
+        patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
         mat_correo = patron_correo.matcher(correo.getText());
 
         patron_usuario = Pattern.compile("[A-Za-z0-9_.]*");
@@ -57,14 +58,23 @@ public class registerController {
             Scene escena = new Scene(loader.load());
             stage.setScene(escena);
             stage.showAndWait();
+
+            Stage CV = (Stage) registrar.getScene().getWindow();
+            CV.close();
+
+            Stage ST = new Stage();
+            FXMLLoader load = new FXMLLoader(getClass().getResource("login.fxml"));
+            Scene sc = new Scene(load.load());
+            ST.setScene(sc);
+            ST.show();
         }else{
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UsuarioInvalido.fxml"));
-            stage.setTitle("ERROR");
             Scene escena = new Scene(loader.load());
             stage.setScene(escena);
             stage.showAndWait();
         }
+
     }
 
     @FXML
