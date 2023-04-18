@@ -29,11 +29,10 @@ public class loginController {
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
 
-        Pattern patron = Pattern.compile("[A-Za-z0-9_.]*||(.*@[g][m][a][i][l][.][c][o][m])||" +
-                                         "(.*@[c][h][a][p][a][l][a][.][t][e][c][m][m][.][e][d][u][.][m][x])");
-        Matcher mat = patron.matcher(usuario.getText());
+        //Pattern patron = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
+        //Matcher mat = patron.matcher(usuario.getText());
 
-        if(mat.matches()) {
+
             ConexionLogin BD = new ConexionLogin();
             String Val_PASSWORD = contraseña.getText();
             String Val_USER= usuario.getText();
@@ -42,9 +41,19 @@ public class loginController {
             String SQL = "SELECT id FROM usuarios" +
                     " WHERE nombre='"+Val_USER+"'OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
 
+            //QUERY PARA CONTRASENA
+            String SQL2 = "SELECT id FROM usuarios WHERE password='"+Val_PASSWORD+"'";
             BD.resultado = BD.sentencia.executeQuery(SQL);
 
             if (BD.resultado.next()) {
+                if (contraseña.getText() == "") {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
+                    stage.setTitle("ERROR");
+                    Scene escena = new Scene(loader.load());
+                    stage.setScene(escena);
+                    stage.show();
+                }
                 Stage s = (Stage) aceptar.getScene().getWindow();
                 s.close();
 
@@ -53,7 +62,7 @@ public class loginController {
                 Scene escena = new Scene(loader.load());
                 stage.setScene(escena);
                 stage.show();
-            } else {
+            }else{
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
                 stage.setTitle("ERROR");
@@ -61,7 +70,7 @@ public class loginController {
                 stage.setScene(escena);
                 stage.show();
             }
-        }
+
     }
 
     @FXML

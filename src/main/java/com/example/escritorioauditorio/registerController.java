@@ -30,8 +30,6 @@ public class registerController {
         Pattern patron_correo, patron_usuario, patron_contraseña;
         Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        //patron_correo = Pattern.compile("(.*@[g][m][a][i][l][.][c][o][m])||" +
-               // "                        (.*@[c][h][a][p][a][l][a][.][t][e][c][m][m][.][e][d][u][.][m]x)");
         patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
         mat_correo = patron_correo.matcher(correo.getText());
 
@@ -44,7 +42,7 @@ public class registerController {
         if(mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()){
             Connection c = ConexionBD.getConexion();
             Statement stm = c.createStatement();
-            String SQL = "INSERT INTO usuarios VALUES(0,'"+correo.getText()+ "','"+usuario.getText()+"','"
+            String SQL = "INSERT INTO usuarios VALUES(0,'"+usuario.getText()+ "','"+correo.getText()+"','"
                     +contraseña.getText()+"')";
             stm.execute(SQL);
 
