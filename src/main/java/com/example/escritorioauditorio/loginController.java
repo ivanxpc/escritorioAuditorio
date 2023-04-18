@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -16,6 +17,10 @@ public class loginController {
     private TextField usuario;
     @FXML
     private PasswordField contraseña;
+    @FXML
+    private TextField contraseñaTF;
+    @FXML
+    private CheckBox mostrar;
     @FXML
     private Button aceptar;
     @FXML
@@ -57,6 +62,19 @@ public class loginController {
                 stage.show();
             }
         }
+    }
+
+    @FXML
+    void visible(ActionEvent evt){
+        if(mostrar.isSelected()){
+            contraseñaTF.setText(contraseña.getText());
+            contraseñaTF.setVisible(true);
+            contraseña.setVisible(false);
+            return;
+        }
+        contraseña.setText(contraseñaTF.getText());
+        contraseña.setVisible(true);
+        contraseñaTF.setVisible(false);
     }
 
     @FXML

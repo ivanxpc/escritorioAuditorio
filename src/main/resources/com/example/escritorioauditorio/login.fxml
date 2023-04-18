@@ -20,13 +20,14 @@
       </ImageView>
       <AnchorPane layoutX="469.0" layoutY="52.0" prefHeight="404.0" prefWidth="303.0" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
-            <CheckBox layoutX="246.0" layoutY="266.0" mnemonicParsing="false" />
+            <TextField fx:id="usuario" layoutX="26.0" layoutY="172.0" prefHeight="25.0" prefWidth="206.0" promptText="Introduce tu usuario" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
+            <TextField fx:id="contraseñaTF" layoutX="32.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
+            <CheckBox fx:id="mostrar" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#visible" />
             <Button layoutX="11.0" layoutY="29.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="206.0" style="-fx-background-color: transparent;" text="INICIAR SESION">
                <font>
                   <Font name="Malgun Gothic" size="24.0" />
                </font>
             </Button>
-            <TextField fx:id="usuario" layoutX="26.0" layoutY="172.0" prefHeight="25.0" prefWidth="206.0" promptText="Introduce tu usuario" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
             <Label layoutX="32.0" layoutY="138.0" text="Usuario">
                <font>
                   <Font size="16.0" />
