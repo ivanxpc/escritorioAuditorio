@@ -48,6 +48,9 @@
             </Label>
             <Separator layoutX="33.0" layoutY="196.0" prefWidth="200.0" />
             <Separator layoutX="33.0" layoutY="288.0" prefWidth="200.0" />
+            <Label fx:id="labAlertaCorreo" layoutX="32.0" layoutY="201.0" />
+            <Label fx:id="labAlertaContrasena" layoutX="58.0" layoutY="201.0" />
+            <Label fx:id="labAlerta" layoutX="32.0" layoutY="293.0" textFill="#e41212" />
          </children>
       </AnchorPane>
    </children>

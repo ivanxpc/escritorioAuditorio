@@ -22,7 +22,7 @@ public class loginController {
     private Button aceptar;
     @FXML
     private Button registrar;
-    /*
+
     //Alerta
     @FXML
     private Label labAlerta;
@@ -30,7 +30,6 @@ public class loginController {
     private Label labAlertaContrasena;
     @FXML
     private Label labAlertaCorreo;
-     */
 
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
@@ -61,22 +60,21 @@ public class loginController {
                 stage.setScene(escena);
                 stage.show();
             }else{
-
+                /*
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
                 stage.setTitle("ERROR");
                 Scene escena = new Scene(loader.load());
                 stage.setScene(escena);
                 stage.show();
+                 */
 
-/*
-                System.out.println("contraseña o correo incorrecto");
                 labAlerta.setVisible(true);
-                labAlerta.setText("");
+                labAlerta.setText("Usuario o contraseña incorrecto(a)");
+                //Thread.sleep(5000);
+                //labAlerta.setText("");
                 labAlertaContrasena.setVisible(false);
                 labAlertaCorreo.setVisible(false);
-
- */
             }
     }
 
