@@ -30,7 +30,6 @@
             <CheckBox fx:id="mostrar" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#visible" />
             <Button fx:id="aceptar" layoutX="33.0" layoutY="352.0" mnemonicParsing="false" onAction="#Aceptar" style="-fx-background-color: c6b1c9;" text="Entrar" />
             <Button fx:id="registrar" layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#Registrar" style="-fx-background-color: c6b1c9;" text="Registrar" />
-            <TextField fx:id="contraseñaTF" editable="false" layoutX="32.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
             <Button layoutX="11.0" layoutY="29.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="206.0" style="-fx-background-color: transparent;" text="INICIAR SESION">
                <font>
                   <Font name="Malgun Gothic" size="24.0" />
@@ -48,6 +47,7 @@
             </Label>
             <Separator layoutX="33.0" layoutY="196.0" prefWidth="200.0" />
             <Separator layoutX="33.0" layoutY="288.0" prefWidth="200.0" />
+            <TextField fx:id="contraseñaTF" disable="true" editable="false" layoutX="32.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
             <Label fx:id="labAlertaCorreo" layoutX="32.0" layoutY="201.0" />
             <Label fx:id="labAlertaContrasena" layoutX="58.0" layoutY="201.0" />
             <Label fx:id="labAlerta" layoutX="32.0" layoutY="293.0" textFill="#e41212" />
