@@ -44,22 +44,14 @@ public class loginController {
             String Val_USER= usuario.getText();
             BD.ConectarBasedeDatos();
 
+            //String SQL = "SELECT id FROM usuarios" +
+                   // " WHERE nombre='"+Val_USER+"'OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
             String SQL = "SELECT id FROM usuarios" +
-                    " WHERE nombre='"+Val_USER+"'OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
-
-            //QUERY PARA CONTRASENA
-            String SQL2 = "SELECT id FROM usuarios WHERE password='"+Val_PASSWORD+"'";
+                " WHERE nombre='"+Val_USER+"'AND password='"+Val_PASSWORD+"'";
             BD.resultado = BD.sentencia.executeQuery(SQL);
 
-            if (BD.resultado.next()) {
-                if (contraseña.getText() == "") {
-                    Stage stage = new Stage();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
-                    stage.setTitle("ERROR");
-                    Scene escena = new Scene(loader.load());
-                    stage.setScene(escena);
-                    stage.show();
-                }
+            if (BD.resultado.next() && contraseña.getText()!="") {
+
                 Stage s = (Stage) aceptar.getScene().getWindow();
                 s.close();
 
@@ -80,6 +72,7 @@ public class loginController {
 /*
                 System.out.println("contraseña o correo incorrecto");
                 labAlerta.setVisible(true);
+                labAlerta.setText("");
                 labAlertaContrasena.setVisible(false);
                 labAlertaCorreo.setVisible(false);
 
