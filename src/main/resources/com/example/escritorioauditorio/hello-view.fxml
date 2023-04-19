@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
         <menus>
@@ -45,13 +45,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="513.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="1027.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/buscar.PNG" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="buscar" layoutX="517.0" layoutY="41.0" onAction="#buscarSolicitantes" style="-fx-background-color: transparent;" />
-                        <TableView fx:id="tabla" layoutX="21.0" layoutY="78.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0">
+                        <TextField fx:id="buscar" layoutX="1036.0" layoutY="57.0" onAction="#buscarSolicitantes" style="-fx-background-color: transparent;" />
+                        <TableView fx:id="tabla" layoutX="27.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center;">
                           <columns>
                               <TableColumn fx:id="id" prefWidth="75.0" text="Folio" />
                             <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
@@ -66,15 +66,14 @@
                               <TableColumn fx:id="fAgenda" minWidth="0.0" prefWidth="128.7999267578125" text="Fecha de agenda " />
                           </columns>
                         </TableView>
-                        <Label layoutX="577.0" layoutY="14.0" text="Buscar" />
-                        <ImageView fitHeight="215.0" fitWidth="228.0" layoutX="710.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                        <Label layoutX="1093.0" layoutY="31.0" text="Buscar" />
+                        <Button fx:id="continuar" disable="true" layoutX="1117.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" />
+                        <Button layoutX="984.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" />
+                        <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="27.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/triangulosMorados.PNG" />
+                              <Image url="@image/logoTecMM.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="656.0" layoutY="14.0" text="Para continuar con la agenda, busca y selecciona una persona y presiona el boton de &quot;Continuar&quot;" />
-                        <Button fx:id="continuar" disable="true" layoutX="912.0" layoutY="41.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" />
-                        <Button layoutX="21.0" layoutY="29.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -84,17 +83,17 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Label layoutX="210.0" layoutY="176.0" prefHeight="25.0" prefWidth="95.0" text="Mobiliario">
+                              <Label layoutX="421.0" layoutY="172.0" prefHeight="25.0" prefWidth="95.0" text="Mobiliario">
                                  <font>
                                     <Font name="Ebrima Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="419.0" layoutY="176.0" prefHeight="25.0" prefWidth="95.0" text="Personas">
+                              <Label layoutX="630.0" layoutY="172.0" prefHeight="25.0" prefWidth="95.0" text="Personas">
                                  <font>
                                     <Font name="Ebrima Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="622.0" layoutY="172.0" prefHeight="25.0" prefWidth="95.0" text="Horario">
+                              <Label layoutX="833.0" layoutY="168.0" prefHeight="25.0" prefWidth="95.0" text="Horario">
                                  <font>
                                     <Font name="Ebrima Bold" size="18.0" />
                                  </font>
@@ -110,13 +109,13 @@
                                  </font>
                               </Label>
                               <Label layoutX="14.0" layoutY="67.0" text="Externos: 1,500" />
-                              <DatePicker fx:id="Calendario" layoutX="20.0" layoutY="215.0" prefHeight="25.0" prefWidth="148.0" />
-                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="622.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="24.888198852539062" AnchorPane.topAnchor="-18.0">
+                              <DatePicker fx:id="Calendario" layoutX="39.0" layoutY="177.0" prefHeight="25.0" prefWidth="324.0" />
+                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="1034.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="404.0" AnchorPane.leftAnchor="1034.0" AnchorPane.rightAnchor="7.8881988525390625" AnchorPane.topAnchor="-22.0">
                                  <image>
                                     <Image url="@image/logoTecMM.png" />
                                  </image>
                               </ImageView>
-                              <AnchorPane layoutX="191.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="198.0">
+                              <AnchorPane layoutX="402.0" layoutY="194.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="194.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" text="1     Sillas (200)" AnchorPane.leftAnchor="14.0" />
                                     <CheckBox fx:id="Sillas" layoutX="166.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
@@ -136,7 +135,7 @@
                                     <CheckBox fx:id="Manteleria" layoutX="166.0" layoutY="189.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="400.0" layoutY="201.0" prefHeight="127.0" prefWidth="200.0" AnchorPane.topAnchor="201.0">
+                              <AnchorPane layoutX="611.0" layoutY="197.0" prefHeight="127.0" prefWidth="200.0" AnchorPane.topAnchor="197.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" text="1     50 - 100" AnchorPane.leftAnchor="14.0" />
                                     <Label layoutX="24.0" layoutY="38.0" text="2     100 - 200" AnchorPane.leftAnchor="14.0" />
@@ -148,7 +147,7 @@
                                     <CheckBox fx:id="Personas4" layoutX="166.0" layoutY="87.0" mnemonicParsing="false" AnchorPane.rightAnchor="27.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="603.0" layoutY="197.0" prefHeight="135.0" prefWidth="200.0" AnchorPane.topAnchor="197.0">
+                              <AnchorPane layoutX="814.0" layoutY="193.0" prefHeight="135.0" prefWidth="200.0" AnchorPane.topAnchor="193.0">
                                  <children>
                                     <CheckBox fx:id="Horario1" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
                                     <Label layoutX="14.0" layoutY="14.0" text="1     30min - 1h" AnchorPane.leftAnchor="14.0" />
@@ -160,8 +159,8 @@
                                     <CheckBox fx:id="Horario4" layoutX="166.0" layoutY="85.0" mnemonicParsing="false" AnchorPane.rightAnchor="18.0" />
                                  </children>
                               </AnchorPane>
-                              <TextField fx:id="Nota" layoutX="407.0" layoutY="317.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
-                              <Button layoutX="730.0" layoutY="419.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="Agendar" />
+                              <TextField fx:id="Nota" layoutX="618.0" layoutY="313.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" />
+                              <Button layoutX="941.0" layoutY="415.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="Agendar" />
                            </children>
                         </AnchorPane>
                      </items>
@@ -172,19 +171,19 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="87.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="469.0" fitWidth="508.0" layoutX="344.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/PDF.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="subir" layoutX="228.0" layoutY="410.0" mnemonicParsing="false" onAction="#adjuntarArchivo" text="Enviar" />
-                        <Button fx:id="descargar" layoutX="417.0" layoutY="410.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" />
-                        <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="635.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                        <Button fx:id="subir" layoutX="651.0" layoutY="477.0" mnemonicParsing="false" onAction="#adjuntarArchivo" text="Enviar" />
+                        <Button fx:id="descargar" layoutX="783.0" layoutY="477.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" />
+                        <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="1028.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                            <image>
                               <Image url="@image/triangulosMorados.PNG" />
                            </image>
                         </ImageView>
-                        <Button fx:id="adjuntar" layoutX="315.0" layoutY="410.0" mnemonicParsing="false" onAction="#testFile" text="Adjuntar" />
+                        <Button fx:id="adjuntar" layoutX="710.0" layoutY="477.0" mnemonicParsing="false" onAction="#testFile" text="Adjuntar" />
                      </children></AnchorPane>
                </content>
             </Tab>

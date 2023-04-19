@@ -15,7 +15,7 @@ public class ConexionLogin{
     public void ConectarBasedeDatos() {
         try {
             final String url_bd = "jdbc:mysql://localhost:3306/auditorio";
-            conexion = DriverManager.getConnection(url_bd, "root", "");
+            conexion = DriverManager.getConnection(url_bd, "root", "12345");
             sentencia = conexion.createStatement();
         } catch (SQLException ex) {
             System.out.println("NO SE PUDO HACER LA CONEXION");
