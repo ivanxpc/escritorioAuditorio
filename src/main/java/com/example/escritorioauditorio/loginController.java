@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.util.regex.*;
 
@@ -25,6 +22,15 @@ public class loginController {
     private Button aceptar;
     @FXML
     private Button registrar;
+    /*
+    //Alerta
+    @FXML
+    private Label labAlerta;
+    @FXML
+    private Label labAlertaContrasena;
+    @FXML
+    private Label labAlertaCorreo;
+     */
 
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
@@ -63,14 +69,22 @@ public class loginController {
                 stage.setScene(escena);
                 stage.show();
             }else{
+
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
                 stage.setTitle("ERROR");
                 Scene escena = new Scene(loader.load());
                 stage.setScene(escena);
                 stage.show();
-            }
 
+/*
+                System.out.println("contraseña o correo incorrecto");
+                labAlerta.setVisible(true);
+                labAlertaContrasena.setVisible(false);
+                labAlertaCorreo.setVisible(false);
+
+ */
+            }
     }
 
     @FXML

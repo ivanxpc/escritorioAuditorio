@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.util.regex.*;
@@ -23,6 +24,8 @@ public class registerController {
     private Button registrar;
     @FXML
     private Button volver;
+
+
 
     @FXML
     public void AgregarUsuarios(ActionEvent evt)throws Exception{
@@ -66,13 +69,14 @@ public class registerController {
             ST.setScene(sc);
             ST.show();
         }else{
+            /*
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UsuarioInvalido.fxml"));
             Scene escena = new Scene(loader.load());
             stage.setScene(escena);
             stage.showAndWait();
+             */
         }
-
     }
 
     @FXML
