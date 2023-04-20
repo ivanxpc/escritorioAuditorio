@@ -130,6 +130,13 @@ public class HelloController {
     @FXML
     private Accordion accordionSolicitantes;
 
+    //sesion
+    @FXML
+    private MenuItem cerrar_s;
+    @FXML
+    private Button cerrar_Sesion;
+
+
     private datos_usuario temporalSolicitantes;
 
     private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
@@ -187,6 +194,29 @@ public class HelloController {
             e.printStackTrace();
         }
         tabla.refresh();
+
+    }
+
+    @FXML
+    public void CerrarSesion(){
+
+        //HelloApplication.setVista("login");
+
+        try {
+
+            Stage test = (Stage) cerrar_Sesion.getScene().getWindow();
+            test.close();
+
+            Stage stage = new Stage();//Crear una nueva ventana
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Scene escena = new Scene(loader.load());
+            stage.setTitle("Finalizado");
+            stage.setScene(escena);//agregar la esena a la ventana
+            stage.showAndWait();
+
+        } catch (Exception d){
+
+        }
 
     }
     @FXML
