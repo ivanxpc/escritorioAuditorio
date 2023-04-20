@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="114.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.exitosoPDF">
+<AnchorPane prefHeight="99.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.exitosoPDF">
    <children>
-      <Label layoutX="29.0" layoutY="28.0" text="Se ha creado el archivo.pdf exitosamente !!" />
-      <Button fx:id="aceptar" layoutX="116.0" layoutY="80.0" mnemonicParsing="false" onAction="#CerrarVentana" text="Aceptar" />
+      <Label layoutX="24.0" layoutY="28.0" text="PDF CREADO CON EXITO">
+         <font>
+            <Font name="Malgun Gothic Bold" size="20.0" />
+         </font></Label>
       <Label layoutX="91.0" layoutY="57.0" text="Dirigite a la carpeta:" />
    </children>
 </AnchorPane>

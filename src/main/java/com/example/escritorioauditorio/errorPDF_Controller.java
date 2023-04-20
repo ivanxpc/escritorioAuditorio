@@ -8,9 +8,4 @@ public class errorPDF_Controller {
     @FXML
     private Button aceptar;
 
-    @FXML
-    private void CerrarVentana() {
-        Stage s = (Stage) aceptar.getScene().getWindow();
-        s.close();
-    }
 }
