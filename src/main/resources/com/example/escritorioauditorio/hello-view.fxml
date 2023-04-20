@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="809.0">
         <menus>
@@ -50,7 +50,7 @@
                               <Image url="@image/buscar.PNG" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="buscar" layoutX="1036.0" layoutY="57.0" onAction="#buscarSolicitantes" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="buscar" layoutX="1036.0" layoutY="57.0" onKeyTyped="#buscarSolicitantes" style="-fx-background-color: transparent;" />
                         <TableView fx:id="tabla" layoutX="27.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center;">
                           <columns>
                               <TableColumn fx:id="id" prefWidth="75.0" text="Folio" />
@@ -68,7 +68,7 @@
                         </TableView>
                         <Label layoutX="1093.0" layoutY="31.0" text="Buscar" />
                         <Button fx:id="continuar" disable="true" layoutX="1117.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" />
-                        <Button layoutX="984.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" />
+                        <Button fx:id="actualizarS" layoutX="984.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" />
                         <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="27.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/logoTecMM.png" />

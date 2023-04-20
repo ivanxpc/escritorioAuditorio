@@ -138,6 +138,7 @@ public class HelloController {
     public void initialize(){
         actualizarDatos();
 
+
     }
     @FXML
     public void actualizarSolicitantes(){
@@ -286,6 +287,7 @@ public class HelloController {
     }
 
 File datos;
+    //Este metodo es para adjuntar los archivos al correo
     @FXML
     public void testFile(){
 
@@ -316,16 +318,6 @@ File datos;
         }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        /*try {
-
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Buscar archivo");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("archivos de texto", "*.pdf"));
-        }catch (Exception e){
-            System.out.println("Error" + e);
-        }
-
-         */
     }
 
     @FXML
@@ -448,7 +440,7 @@ File datos;
     //ACCION PARA BUSCAR
 
     @FXML
-    public void buscarSolicitantes(KeyEvent evt) {
+    public void buscarSolicitantes() {
         Connection c = ConexionBD.getConexion();
         try {
             Statement stm = c.createStatement();
@@ -458,16 +450,16 @@ File datos;
             while (r.next()) {
                 tabla.setItems(bd_usuarioDatos);
                 bd_usuarioDatos.add(new datos_usuario(
-                        r.getInt("ID"),
-                        r.getString("Nombre"),
+                        r.getInt("id"),
+                        r.getString("nombre"),
                         r.getString("apellidoP"),
                         r.getString("apellidoM"),
-                        r.getString("Cargo"),
-                        r.getString("Area"),
+                        r.getString("cargo"),
+                        r.getString("area"),
                         r.getString("tipoSolicitante"),
-                        r.getString("Motivo"),
+                        r.getString("motivo"),
                         r.getString("fecha"),
-                        r.getString("Contacto"),
+                        r.getString("contacto"),
                         r.getString("fechaAgenda")));
 
 
