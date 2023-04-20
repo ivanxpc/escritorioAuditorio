@@ -51,6 +51,7 @@
             <TextField fx:id="contraseña" layoutX="29.0" layoutY="312.0" prefHeight="25.0" prefWidth="206.0" promptText="Registra una contraseña" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="29.0" />
             <Separator layoutX="37.0" layoutY="335.0" prefWidth="200.0" AnchorPane.leftAnchor="33.0" />
             <Button fx:id="volver" layoutX="112.0" layoutY="366.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+            <Label fx:id="labAlerta" layoutX="33.0" layoutY="190.0" textFill="#e41212" />
          </children>
       </AnchorPane>
    </children>

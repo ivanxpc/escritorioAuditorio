@@ -25,6 +25,9 @@ public class registerController {
     @FXML
     private Button volver;
 
+    //Alertas
+    @FXML
+    private Label labAlerta;
 
 
     @FXML
@@ -76,6 +79,13 @@ public class registerController {
             stage.setScene(escena);
             stage.showAndWait();
              */
+
+            labAlerta.setVisible(true);
+            labAlerta.setText("Formato de correo no valido");
+            //Thread.sleep(5000);
+            //labAlerta.setText("");
+            //labAlertaContrasena.setVisible(false);
+            //labAlertaCorreo.setVisible(false);
         }
     }
 
