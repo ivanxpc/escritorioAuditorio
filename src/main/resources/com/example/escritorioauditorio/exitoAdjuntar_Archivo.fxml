@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="72.0" prefWidth="248.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.exitoAdjuntar">
+   <children>
+      <Label layoutX="12.0" layoutY="27.0" text="Se ha adjuntado el archivo correctamente!!" />
+   </children>
+</AnchorPane>

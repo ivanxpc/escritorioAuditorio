@@ -340,6 +340,18 @@ File datos;
 
         }
         System.out.println(datos);
+
+        try {
+            Stage stage = new Stage();//Crear una nueva ventana
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
+            Scene escena = new Scene(loader.load());
+            stage.setTitle("Finalizado");
+            stage.setScene(escena);//agregar la esena a la ventana
+            stage.showAndWait();
+        } catch (Exception d){
+
+        }
+
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(datos);
@@ -415,6 +427,19 @@ File datos;
             transporte.close();
 
             System.out.println("El mensaje se ha enviado  . ");
+
+            try {
+                Stage stage = new Stage();//Crear una nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("enviarArchivo.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("Finalizado");
+                stage.setScene(escena);//agregar la esena a la ventana
+                stage.showAndWait();
+            } catch (Exception d){
+
+            }
+
+
 
 
         } catch (AddressException ex) {
@@ -660,12 +685,12 @@ File datos;
                         espacio.add("\n" );
                         contacto.add("                       Contacto:   "+rs.getString(10));
                         motivo.add("                       Motivo:   "+rs.getString(8));
-                        fecha.add("                       Fecha de elaboracion de solicitud:   "+rs.getString(9));
+                        fecha.add("                       Fecha de elaboración de solicitud:   "+rs.getString(9));
                         fechaDP.add("                       Fecha de Agenda:   " + rs.getString(11));
                         espacio.add("\n");
 
                         //Moviliario
-                        mobiliario.add("                       Moviliario seleccionado:\n");
+                        mobiliario.add("                       Mobiliario seleccionado:\n");
                         if (Sillas.isSelected()) {
                             sillas.add( "                       Sillas\n");
                         }else if (Sillas.isDisabled()){
@@ -682,7 +707,7 @@ File datos;
 
                         }
                         if (Microfonos.isSelected()) {
-                            microfonos.add( "                       Microfonos\n");
+                            microfonos.add( "                       Micrófonos\n");
                         }else if (Microfonos.isDisabled()){
 
                         }
@@ -702,7 +727,7 @@ File datos;
 
                         }
                         if (Manteleria.isSelected()) {
-                            manteleria.add( "                       Manteleria\n");
+                            manteleria.add( "                       Mantelería\n");
                         }else if (Manteleria.isDisabled()){
 
                         }
@@ -738,7 +763,7 @@ File datos;
 
 
                         //Horario
-                        horario.add("                       Duracion del evento: \n");
+                        horario.add("                       Duración del evento: \n");
                         if (Horario1.isSelected()) {
                             h1.add( "                       30min - 1h \n");
                         }else if (Horario1.isDisabled()){
@@ -762,7 +787,7 @@ File datos;
                         separacion.add("                       ------------------------------------ \n");
 
                         //Nota
-                        texto.add("                        Descripcion de otro elemento extra: "+Nota.getText());
+                        texto.add("                        Descripción de otro elemento extra: "+Nota.getText());
 
                         //parrafo.add(rs.getString(8));
                         //tabla.addCell(rs.getString(11));

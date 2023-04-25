@@ -10,7 +10,7 @@ public class ConexionBD {
             if (c==null) {
                 String url = "jdbc:mysql://localhost:3306/auditorio";
                 //Paso 1 = Crear una conexion;
-                c = DriverManager.getConnection(url, "root", "12345");
+                c = DriverManager.getConnection(url, "root", "");
             }
         }catch (Exception e){
             e.printStackTrace();
