@@ -11,13 +11,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -31,6 +38,8 @@ import javax.mail.internet.MimeMultipart;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.util.Callback;
+
 public class HelloController {
     //TAB
 
@@ -92,6 +101,14 @@ public class HelloController {
     private Button subir;
     @FXML
     private Button adjuntar;
+    @FXML
+    private ImageView archivo1;
+    @FXML
+    private Button btn_archivo1;
+    @FXML
+    private ImageView archivo2;
+    @FXML
+    private Button btn_archivo2;
 
     //Folio
 
@@ -142,16 +159,78 @@ public class HelloController {
     private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
     Document documento = new Document();
 
+
+
+
     public void initialize(){
         actualizarDatos();
+        actualizarSolicitantes();
+        //DatePicker fecha = new DatePicker();
+        Calendario.setDayCellFactory(dayCellFactory);
+
+
+
 
 
     }
+    DatePicker fecha = new DatePicker();
+
+    Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+
+        public void updateItem(LocalDate item, boolean empty) {
+
+
+
+            super.updateItem(item, empty);
+
+            this.setDisable(false);
+            this.setBackground(null);
+            this.setTextFill(Color.BLACK);
+
+            // deshabilitar las fechas futuras
+            /*if (item.isAfter(LocalDate.now())) {
+                this.setDisable(true);
+            }
+
+             */
+
+            // marcar los dias de quincena
+            int day = item.getDayOfMonth();
+            /*
+            if (day == Calendario.hashCode()){
+                //day == 15 || day == 30
+
+            }
+
+             */
+            //day == Calendario.getValue().getDayOfMonth())
+            //fecha.setOnAction(e -> System.out.println("fecha: " +  fecha.getValue()));
+            //fAgenda.getText();
+            //System.out.println(fAgenda);
+            if(day == 15 || day == 30) {
+
+                Paint color = Color.RED;
+                BackgroundFill fill = new BackgroundFill(color, null, null);
+
+                this.setBackground(new Background(fill));
+                this.setTextFill(Color.WHITESMOKE);
+            }
+
+            // fines de semana en color verde
+            DayOfWeek dayweek = item.getDayOfWeek();
+            if (dayweek == DayOfWeek.SATURDAY || dayweek == DayOfWeek.SUNDAY) {
+                this.setTextFill(Color.GREEN);
+            }
+        }
+    };
+
+
+
     @FXML
     public void actualizarSolicitantes(){
         actualizarDatos();
     }
-
+//Actualizar datos de la tabla
     public void actualizarDatos(){
 
         try {
@@ -319,8 +398,13 @@ public class HelloController {
 File datos;
     //Este metodo es para adjuntar los archivos al correo
     @FXML
-    public void testFile(){
+    public void adjunatarArechivo_C(){
+        /*btn_archivo1.setDisable(false);
+        btn_archivo2.setDisable(false);
+        archivo1.setDisable(false);
+        archivo2.setDisable(false);
 
+         */
 
         File archivo = new File("Archivos");
         System.out.println(archivo.getAbsolutePath());
@@ -362,8 +446,30 @@ File datos;
 
     }
 
+   /* public void eliminarArchivoSubido(){
+        datos.delete();
+    }
+
+    */
+
+
+    public boolean deleteFile(String file) {
+
+        File f = new File(file);
+
+        if (f.delete()) {
+            System.out.println("File " + file + " is deleted");
+            return true;
+        }
+
+        System.out.println("Error deleting file: " + file);
+        return false;
+    }
+
+
+//Metodo para enviar por correo los archivos
     @FXML
-    public void adjuntarArchivo(){
+    public void enviarArchivo_C(){
 
         try {
             Properties propiedades = new Properties();
@@ -468,27 +574,6 @@ File datos;
         }
 
     }
-/*
-    @FXML
-    public void agreagarFecha_Agenda(ActionEvent evt){
-        try {
-            Connection c = ConexionBD.getConexion();
-            Statement stm = c.createStatement();
-            //UPDATE datosusuario SET fechaAgenda = "2023/04/23" WHERE id = 3
-            String sql = "UPDATE datosusuario SET fechaAgenda = '"+ Calendario.getValue() + "'  WHERE id = " + idSolicitantes;
-            System.out.println("DATOS INSERTADOS");
-            stm.execute(sql);
-            //Se lo agrege stm.close****
-            stm.close();
-            actualizarDatos();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e+ "No se inserto datos!!\n");
-        }
-
-    }
-*/
-
 
 
 
@@ -535,6 +620,7 @@ File datos;
             e.printStackTrace();
         }
     }
+    //Metodo para generar PDF
 
     @FXML
     public void metodoGenerar_PDF() {

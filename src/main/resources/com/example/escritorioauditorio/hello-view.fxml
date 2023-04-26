@@ -158,14 +158,14 @@
                               <Image url="@image/PDF.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="subir" layoutX="651.0" layoutY="477.0" mnemonicParsing="false" onAction="#adjuntarArchivo" text="Enviar" />
+                        <Button fx:id="subir" layoutX="651.0" layoutY="477.0" mnemonicParsing="false" onAction="#enviarArchivo_C" text="Enviar" />
                         <Button fx:id="descargar" layoutX="783.0" layoutY="477.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" />
                         <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="1028.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                            <image>
                               <Image url="@image/triangulosMorados.PNG" />
                            </image>
                         </ImageView>
-                        <Button fx:id="adjuntar" layoutX="710.0" layoutY="477.0" mnemonicParsing="false" onAction="#testFile" text="Adjuntar" />
+                        <Button fx:id="adjuntar" layoutX="710.0" layoutY="477.0" mnemonicParsing="false" onAction="#adjunatarArechivo_C" text="Adjuntar" />
                      </children></AnchorPane>
                </content>
             </Tab>
