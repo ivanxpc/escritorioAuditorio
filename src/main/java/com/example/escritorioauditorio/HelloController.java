@@ -178,9 +178,6 @@ public class HelloController {
     Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
 
         public void updateItem(LocalDate item, boolean empty) {
-
-
-
             super.updateItem(item, empty);
 
             this.setDisable(false);
@@ -194,27 +191,43 @@ public class HelloController {
 
              */
 
-            // marcar los dias de quincena
-            int day = item.getDayOfMonth();
-            /*
-            if (day == Calendario.hashCode()){
-                //day == 15 || day == 30
+            int day ;
+            int month;
+            int year;
 
-            }
-
-             */
             //day == Calendario.getValue().getDayOfMonth())
             //fecha.setOnAction(e -> System.out.println("fecha: " +  fecha.getValue()));
             //fAgenda.getText();
             //System.out.println(fAgenda);
-            if(day == 15 || day == 30) {
 
-                Paint color = Color.RED;
-                BackgroundFill fill = new BackgroundFill(color, null, null);
+            String valor;
+            try {
+                Connection c = ConexionBD.getConexion();
+                Statement stm = c.createStatement();
+                String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+                ResultSet r = stm.executeQuery(sql);
+                //stm.execute(sql);
 
-                this.setBackground(new Background(fill));
-                this.setTextFill(Color.WHITESMOKE);
+                while(r.next()){
+                        day = item.getDayOfMonth();
+                        month = item.getMonthValue();
+                        year = item.getYear();
+                        //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+
+                        if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                            Paint color = Color.RED;
+                            BackgroundFill fill = new BackgroundFill(color, null, null);
+                            this.setBackground(new Background(fill));
+                            this.setTextFill(Color.WHITESMOKE);
+                        }
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+
 
             // fines de semana en color verde
             DayOfWeek dayweek = item.getDayOfWeek();
@@ -574,6 +587,44 @@ File datos;
         }
 
     }
+
+    //Para cargar tabla automaticamente
+
+   /* @FXML
+    private void cargarTabla() {
+        try {
+            Connection miComando = ConexionBD.getConexion();
+            CallableStatement obtenerClientes = miComando.prepareCall("SELECT * FROM datosusuario");
+            ResultSet rs = obtenerClientes.executeQuery();
+            //Obtiene información sobre los tipos y las propiedades de las columnas de un ResultSet.
+            ResultSetMetaData rsmd = rs.getMetaData();
+            //String Titulo[] = {"Nro", "Nombre", "Apellido", "Domicilio", "Teléfono", "Facebook", "Localidad"};
+            //Creamos un arreglo y le pasamos rsmd, con getColumnCount() optenemos las cantidades de columnas de la BD.
+            Object[] fila = new Object[rsmd.getColumnCount()];
+            datos_usuario modelo = new datos_usuario(rs.getInt("id"),rs.getString("nombre"),rs.getString("apellidoP"),rs.getString("apellidoM"),rs.getString("cargo"),rs.getString("area"),rs.getString("tipoSolicitante"),rs.getString("motivo"),rs.getString("fecha"),rs.getString("contacto"),rs.getString("fechaAgenda"));
+            while (rs.next()) {
+                fila[0] = rs.getInt("id"); //Lo que hay entre comillas son los campos de la base de datos.
+                fila[1] = rs.getString("nombre");
+                fila[2] = rs.getString("apellidoP");
+                fila[3] = rs.getString("apellidoM");
+                fila[4] = rs.getString("cargo");
+                fila[5] = rs.getString("area");
+                fila[6] = rs.getString("tipoSolicitante");
+                fila[7] = rs.getString("Motivo");
+                fila[8] = rs.getString("fecha");
+                fila[9] = rs.getString("contacto");
+                fila[10] = rs.getString("fechaAgenda");
+                //modelo.addRow(fila); // Añade una fila al final del modelo de la tabla
+            }
+
+
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(null, "Error al intentar obtener los cliente:\n"
+                   // + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    */
 
 
 

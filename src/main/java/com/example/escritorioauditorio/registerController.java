@@ -36,7 +36,8 @@ public class registerController {
         Pattern patron_correo, patron_usuario, patron_contraseña;
         Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
+        //patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
+        patron_correo = Pattern.compile("[a-zA-Z0-9_.]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
         mat_correo = patron_correo.matcher(correo.getText());
 
         patron_usuario = Pattern.compile("[A-Za-z0-9_.]*");
