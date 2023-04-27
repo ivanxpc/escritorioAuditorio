@@ -3,6 +3,7 @@ package com.example.escritorioauditorio;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -153,6 +154,11 @@ public class HelloController {
     @FXML
     private Button cerrar_Sesion;
 
+    //MenuBar
+    @FXML
+    public void cerrarApp(ActionEvent evt) {
+        Platform.exit();
+    }
 
     private datos_usuario temporalSolicitantes;
 
@@ -167,11 +173,6 @@ public class HelloController {
         actualizarSolicitantes();
         //DatePicker fecha = new DatePicker();
         Calendario.setDayCellFactory(dayCellFactory);
-
-
-
-
-
     }
     DatePicker fecha = new DatePicker();
 

@@ -13,41 +13,41 @@
 
 <AnchorPane prefHeight="519.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.loginController">
    <children>
-      <ImageView fitHeight="401.0" fitWidth="442.0" layoutX="7.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="66.65554809570312" AnchorPane.topAnchor="57.0">
+      <ImageView fitHeight="401.0" fitWidth="442.0" layoutX="7.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="57.0">
          <image>
             <Image url="@image/logoTecMM.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="469.0" layoutY="52.0" prefHeight="404.0" prefWidth="303.0" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane layoutX="469.0" layoutY="52.0" prefHeight="404.0" prefWidth="303.0" AnchorPane.leftAnchor="462.0" AnchorPane.topAnchor="50.0">
          <children>
-            <ImageView fitHeight="419.0" fitWidth="303.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="419.0" fitWidth="303.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
                <image>
                   <Image url="@image/Marco.png" />
                </image>
             </ImageView>
-            <TextField fx:id="usuario" layoutX="26.0" layoutY="172.0" prefHeight="25.0" prefWidth="206.0" promptText="Introduce tu usuario" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
+            <TextField fx:id="usuario" layoutX="26.0" layoutY="172.0" prefHeight="25.0" prefWidth="206.0" promptText="Introduce tu usuario" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="172.0" />
             <PasswordField fx:id="contraseña" layoutX="31.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" promptText="Introduce tu contraseña" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
-            <CheckBox fx:id="mostrar" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#visible" />
-            <Button fx:id="aceptar" layoutX="33.0" layoutY="352.0" mnemonicParsing="false" onAction="#Aceptar" text="Entrar" />
-            <Button fx:id="registrar" layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#Registrar" text="Registrar" />
-            <Button layoutX="11.0" layoutY="29.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="206.0" style="-fx-background-color: transparent;" text="INICIAR SESION">
+            <CheckBox fx:id="mostrar" layoutX="246.0" layoutY="266.0" mnemonicParsing="false" onAction="#visible" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="266.0" />
+            <Button fx:id="aceptar" layoutX="33.0" layoutY="352.0" mnemonicParsing="false" onAction="#Aceptar" text="Entrar" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="352.0" />
+            <Button fx:id="registrar" layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#Registrar" text="Registrar" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="352.0" />
+            <Button layoutX="11.0" layoutY="29.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="206.0" style="-fx-background-color: transparent;" text="INICIAR SESION" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="29.0">
                <font>
                   <Font name="Malgun Gothic" size="24.0" />
                </font>
             </Button>
-            <Label layoutX="32.0" layoutY="138.0" text="Usuario">
+            <Label layoutX="32.0" layoutY="138.0" text="Usuario" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="138.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="230.0" text="Contraseña">
+            <Label layoutX="32.0" layoutY="230.0" text="Contraseña" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="230.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Separator layoutX="33.0" layoutY="196.0" prefWidth="200.0" />
-            <Separator layoutX="33.0" layoutY="288.0" prefWidth="200.0" />
-            <TextField fx:id="contraseñaTF" disable="true" editable="false" layoutX="32.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="26.0" />
+            <Separator layoutX="33.0" layoutY="196.0" prefWidth="200.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="196.0" />
+            <Separator layoutX="33.0" layoutY="288.0" prefWidth="200.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="288.0" />
+            <TextField fx:id="contraseñaTF" disable="true" editable="false" layoutX="32.0" layoutY="262.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="262.0" />
             <Label fx:id="labAlertaCorreo" layoutX="32.0" layoutY="201.0" />
             <Label fx:id="labAlertaContrasena" layoutX="58.0" layoutY="201.0" />
             <Label fx:id="labAlerta" layoutX="32.0" layoutY="293.0" textFill="#e41212" />
