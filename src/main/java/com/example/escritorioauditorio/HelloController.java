@@ -94,7 +94,7 @@ public class HelloController {
     @FXML
     private CheckBox Horario4;
 
-    //PDF
+    //PDF adjuntar
 
     @FXML
     private Button descargar;
@@ -103,6 +103,8 @@ public class HelloController {
     @FXML
     private Button adjuntar;
     @FXML
+    private Button adjuntar1;
+    @FXML
     private ImageView archivo1;
     @FXML
     private Button btn_archivo1;
@@ -110,6 +112,10 @@ public class HelloController {
     private ImageView archivo2;
     @FXML
     private Button btn_archivo2;
+    @FXML
+    private Label archivo1L;
+    @FXML
+    private Label archivo2L;
 
     //Folio
 
@@ -145,8 +151,6 @@ public class HelloController {
     private TextField buscar;
     @FXML
     private Button continuar;
-    @FXML
-    private Accordion accordionSolicitantes;
 
     //sesion
     @FXML
@@ -201,7 +205,7 @@ public class HelloController {
             //fAgenda.getText();
             //System.out.println(fAgenda);
 
-            String valor;
+            //String valor;
             try {
                 Connection c = ConexionBD.getConexion();
                 Statement stm = c.createStatement();
@@ -227,8 +231,6 @@ public class HelloController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
             // fines de semana en color verde
             DayOfWeek dayweek = item.getDayOfWeek();
@@ -293,8 +295,6 @@ public class HelloController {
     @FXML
     public void CerrarSesion(){
 
-        //HelloApplication.setVista("login");
-
         try {
 
             Stage test = (Stage) cerrar_Sesion.getScene().getWindow();
@@ -316,8 +316,12 @@ public class HelloController {
     public void descargarArchivo()throws Exception {
         //Esta es mi dirrrecion de Ivan PC
         //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
-        String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
+        String ruta = System.getProperty("user.home");
+         ruta = "C:\\Users\\nalai\\Downloads\\Formulario.pdf";
+
+
+        //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
         //Esta es mi dirrrecion de Ivan PC
         //Image imagen = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
@@ -326,7 +330,8 @@ public class HelloController {
         imagen.setAlignment(Chunk.ALIGN_JUSTIFIED);
 
         Document Descarga_PDF = new Document();
-        PdfWriter.getInstance(Descarga_PDF, new FileOutputStream(File_name));
+        PdfWriter.getInstance(Descarga_PDF, new FileOutputStream(ruta));
+        //PdfWriter.getInstance(Descarga_PDF, new FileOutputStream(File_name));
 
         Descarga_PDF.open();
         Descarga_PDF.add(imagen);
@@ -345,141 +350,129 @@ public class HelloController {
 
         }
 
-    //Tab siguente
+    //Metodo para ir a la Tab siguente
     public void siguiente(){
             tabGeneral.getSelectionModel().select(1);
     }
 
-    //Metodo para enviar los archivos por correo
-    public void enviarArechivos(){
-        try {
-            Properties propiedades = new Properties();
-            /*
-            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
-            propiedades.setProperty("mail.smtp.starttls.enable", "true");
-            propiedades.setProperty("mail.smtp.port", "587");
-            propiedades.setProperty("mail.smtp.auth", "true");
-
-             */
-            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
-            propiedades.setProperty("mail.smtp.port", "465");
-            propiedades.setProperty("mail.smtp.auth", "true");
-            propiedades.setProperty("mail.smtp.starttls.enable", "true");
-            propiedades.setProperty("mail.smtp.starttls.required", "true");
-            propiedades.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-            propiedades.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-            Session sesion = Session.getDefaultInstance(propiedades);
-
-            String correo_emisor = "ipadillacordova@gmail.com";
-            String password_emisor = "rideprwxpzwbjpqc";
-
-            //String correo_receptor = "ch200110782@chapala.tecmm.edu.mx";
-            /*String correo_receptor = "ipadillacordova@gmail.com";
-
-            String mensaje = "Hola me llamo Ivan Padilla ";
-            String asunto = "Esto es una prueba";
-
-             */
-            String correo_receptor = "ipadillacordova@gmail.com";
-            String asunto = "Java";
-            String mensaje = "Hola , me llamo christian Ramirez";
-
-            MimeMessage message = new MimeMessage(sesion);
-            message.setFrom(new InternetAddress(correo_emisor));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
-            message.setSubject(asunto);
-            message.setText(mensaje);
-
-            Transport transporte = sesion.getTransport("smtp");
-            transporte.connect(correo_emisor,password_emisor);
-            transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
-            transporte.close();
-
-            System.out.println("El mensaje se ha enviado  . ");
-
-
-        } catch (AddressException ex) {
-            System.out.println("Error en el correo" + ex);
-            //JOptionPane.showMessageDialog(null,"Error : " +ex);
-        } catch (MessagingException ex) {
-            //JOptionPane.showMessageDialog(null,"Error : " +ex);
-            System.out.println("Error en el mensaje" + ex);
-        }
-
-    }
-
-File datos;
-    //Este metodo es para adjuntar los archivos al correo
+    File datos;
+    File datos1;
+    FileChooser fileChooser = new FileChooser();
+    //Este metodo es para adjuntar los archivos al correo Button adjuntar
     @FXML
     public void adjunatarArechivo_C(){
-        /*btn_archivo1.setDisable(false);
-        btn_archivo2.setDisable(false);
-        archivo1.setDisable(false);
-        archivo2.setDisable(false);
 
-         */
+            datos = fileChooser.showOpenDialog(null);
 
-        File archivo = new File("Archivos");
-        System.out.println(archivo.getAbsolutePath());
-        System.out.println(archivo.exists());
+            fileChooser.setTitle("Buscar archivo");
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("archivos de texto", "*.pdf"));
+            //File ruta = new File(String.valueOf(fileChooser));
 
-        FileChooser fileChooser = new FileChooser();
-         datos = fileChooser.showOpenDialog(null);
+            // Archivo 1
+            if (datos == null) {
+                try {
+                    Stage stage = new Stage();//Crear una nueva ventana
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("errorAdjuntar.fxml"));
+                    Scene escena = new Scene(loader.load());
+                    stage.setTitle("Finalizado");
+                    stage.setScene(escena);//agregar la ecena a la ventana
+                    stage.showAndWait();
+                } catch (Exception d) {
+                    //System.out.println(d + "No se ha adjuntado ningun archivo");
 
-        fileChooser.setTitle("Buscar archivo");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("archivos de texto", "*.pdf"));
-        //File ruta = new File(String.valueOf(fileChooser));
+                }
 
+            }else {
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
+                    Scene escena = new Scene(loader.load());
+                    stage.setTitle("Finalizado");
+                    stage.setScene(escena);
+                    stage.showAndWait();
+                } catch (Exception d) {
+                    //System.out.println(d + "No se ha adjuntado ningun archivo");
 
-        if (datos == null) {
-            System.out.println("No has seleccionado ningun archivo");
+                }
 
+            }
+
+            if (datos != null){
+                btn_archivo1.setDisable(false);
+                archivo1L.setText(String.valueOf(datos));
+                archivo1.setVisible(true);
+
+            }
+    }
+    @FXML
+    public void adjuntarArchivo_C1(){
+
+        datos1 = fileChooser.showOpenDialog(null);
+
+        //Archivo 2
+        if (datos1 == null) {
+            try {
+                Stage stage = new Stage();//Crear una nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("errorAdjuntar.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("Finalizado");
+                stage.setScene(escena);//agregar la ecena a la ventana
+                stage.showAndWait();
+            } catch (Exception d) {
+
+            }
+
+        }else {
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("Finalizado");
+                stage.setScene(escena);
+                stage.showAndWait();
+            } catch (Exception d) {
+
+            }
 
         }
-        System.out.println(datos);
 
-        try {
-            Stage stage = new Stage();//Crear una nueva ventana
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
-            Scene escena = new Scene(loader.load());
-            stage.setTitle("Finalizado");
-            stage.setScene(escena);//agregar la esena a la ventana
-            stage.showAndWait();
-        } catch (Exception d){
+        if (datos1 != null){
+            btn_archivo2.setDisable(false);
+            archivo2L.setText(String.valueOf(datos1));
+            archivo2.setVisible(true);
 
         }
-
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(datos);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
     }
 
-   /* public void eliminarArchivoSubido(){
-        datos.delete();
-    }
+//Metodo para eliminar los archivo1 seleccionado
+    @FXML
+    public void deleteFile(ActionEvent evt) {
 
-    */
-
-
-    public boolean deleteFile(String file) {
-
-        File f = new File(file);
-
-        if (f.delete()) {
-            System.out.println("File " + file + " is deleted");
-            return true;
+        if (datos != null) {
+            datos = new File("");
+            System.out.println("Archivo eliminado");
+            btn_archivo1.setDisable(true);
+            archivo1L.setText("");
+            archivo1.setVisible(true);
         }
 
-        System.out.println("Error deleting file: " + file);
-        return false;
     }
 
+    //Metodo para eliminar los archivo2 seleccionado
+    @FXML
+    public void deleteFile1(ActionEvent evt) {
+
+        if(datos1 != null) {
+            datos1 = new File("");
+            System.out.println("Archivo eliminado");
+            btn_archivo2.setDisable(true);
+            archivo2L.setText("");
+            archivo2.setVisible(true);
+
+        }
+
+    }
 
 //Metodo para enviar por correo los archivos
     @FXML
@@ -488,14 +481,6 @@ File datos;
         try {
             Properties propiedades = new Properties();
 
-
-            /*
-            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
-            propiedades.setProperty("mail.smtp.starttls.enable", "true");
-            propiedades.setProperty("mail.smtp.port", "587");
-            propiedades.setProperty("mail.smtp.auth", "true");
-
-             */
             propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
             propiedades.setProperty("mail.smtp.port", "465");
             propiedades.setProperty("mail.smtp.auth", "true");
@@ -506,8 +491,12 @@ File datos;
 
             Session sesion = Session.getDefaultInstance(propiedades);
 
+
+            //Este si funciona
             String correo_emisor = "ipadillacordova@gmail.com";
             String password_emisor = "rideprwxpzwbjpqc";
+
+
 
             //String correo_receptor = "ch200110782@chapala.tecmm.edu.mx";
             /*String correo_receptor = "ipadillacordova@gmail.com";
@@ -518,22 +507,38 @@ File datos;
              */
             String correo_receptor = "ipadillacordova@gmail.com";
             String asunto = "Archivos del Solicitante";
-            //String mensaje = "Hola , me llamo christian Ramirez";
-            String mensaje = "Solicitud y formulario <br> Auditorio Tec de Chapala <br> <i>Esto es una prueba</i>";
+            String mensaje = "Solicitud y formulario <br> Auditorio Tec de Chapala <br> <i>Archivos del solicitante: </i>";
 
             BodyPart texto = new MimeBodyPart();
             texto.setContent(mensaje,"text/html");
 
+            //Archivo1
             BodyPart adjuntos = new MimeBodyPart();
             //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
             adjuntos.setDataHandler(new DataHandler(new FileDataSource(datos)));
-            adjuntos.setFileName("Archivo.pdf");
+            adjuntos.setFileName("Archivo1.pdf");
             //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
             System.out.println("Archivo adjuntado!!");
             MimeMultipart partes = new MimeMultipart();
             partes.addBodyPart(texto);
             partes.addBodyPart(adjuntos);
 
+
+            //Archivo2
+            BodyPart adjuntos1 = new MimeBodyPart();
+            //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
+            adjuntos1.setDataHandler(new DataHandler(new FileDataSource(datos1)));
+            adjuntos1.setFileName("Archivo2.pdf");
+            //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
+            System.out.println("Archivo adjuntado!!");
+            MimeMultipart partes1 = new MimeMultipart();
+            partes1.addBodyPart(texto);
+            partes1.addBodyPart(adjuntos1);
+
+
+
+
+            //Correo de archivo1
             MimeMessage message = new MimeMessage(sesion);
             message.setFrom(new InternetAddress(correo_emisor));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
@@ -545,6 +550,19 @@ File datos;
             transporte.connect(correo_emisor,password_emisor);
             transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
             transporte.close();
+
+            //Correo de archivo2
+            MimeMessage message1 = new MimeMessage(sesion);
+            message1.setFrom(new InternetAddress(correo_emisor));
+            message1.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+            message1.setSubject(asunto);
+            message1.setContent(partes1);
+
+            Transport transporte1 = sesion.getTransport("smtp");
+            transporte1.connect(correo_emisor,password_emisor);
+            transporte1.sendMessage(message1 , message1.getRecipients(Message.RecipientType.TO));
+            transporte1.close();
+
 
             System.out.println("El mensaje se ha enviado  . ");
 
@@ -563,7 +581,7 @@ File datos;
 
 
         } catch (AddressException ex) {
-            System.out.println("Error enel correo" + ex);
+            System.out.println("Error en el correo" + ex);
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
         } catch (MessagingException ex) {
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
@@ -589,47 +607,9 @@ File datos;
 
     }
 
-    //Para cargar tabla automaticamente
-
-   /* @FXML
-    private void cargarTabla() {
-        try {
-            Connection miComando = ConexionBD.getConexion();
-            CallableStatement obtenerClientes = miComando.prepareCall("SELECT * FROM datosusuario");
-            ResultSet rs = obtenerClientes.executeQuery();
-            //Obtiene información sobre los tipos y las propiedades de las columnas de un ResultSet.
-            ResultSetMetaData rsmd = rs.getMetaData();
-            //String Titulo[] = {"Nro", "Nombre", "Apellido", "Domicilio", "Teléfono", "Facebook", "Localidad"};
-            //Creamos un arreglo y le pasamos rsmd, con getColumnCount() optenemos las cantidades de columnas de la BD.
-            Object[] fila = new Object[rsmd.getColumnCount()];
-            datos_usuario modelo = new datos_usuario(rs.getInt("id"),rs.getString("nombre"),rs.getString("apellidoP"),rs.getString("apellidoM"),rs.getString("cargo"),rs.getString("area"),rs.getString("tipoSolicitante"),rs.getString("motivo"),rs.getString("fecha"),rs.getString("contacto"),rs.getString("fechaAgenda"));
-            while (rs.next()) {
-                fila[0] = rs.getInt("id"); //Lo que hay entre comillas son los campos de la base de datos.
-                fila[1] = rs.getString("nombre");
-                fila[2] = rs.getString("apellidoP");
-                fila[3] = rs.getString("apellidoM");
-                fila[4] = rs.getString("cargo");
-                fila[5] = rs.getString("area");
-                fila[6] = rs.getString("tipoSolicitante");
-                fila[7] = rs.getString("Motivo");
-                fila[8] = rs.getString("fecha");
-                fila[9] = rs.getString("contacto");
-                fila[10] = rs.getString("fechaAgenda");
-                //modelo.addRow(fila); // Añade una fila al final del modelo de la tabla
-            }
 
 
-        } catch (Exception e) {
-            //JOptionPane.showMessageDialog(null, "Error al intentar obtener los cliente:\n"
-                   // + e, "Error en la operación", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    */
-
-
-
-    //ACCION PARA BUSCAR
+    //ACCION PARA BUSCAR SOLICITANTES
 
     @FXML
     public void buscarSolicitantes() {
