@@ -454,7 +454,7 @@ public class HelloController {
             System.out.println("Archivo eliminado");
             btn_archivo1.setDisable(true);
             archivo1L.setText("");
-            archivo1.setVisible(true);
+            archivo1.setVisible(false);
         }
 
     }
@@ -468,7 +468,7 @@ public class HelloController {
             System.out.println("Archivo eliminado");
             btn_archivo2.setDisable(true);
             archivo2L.setText("");
-            archivo2.setVisible(true);
+            archivo2.setVisible(false);
 
         }
 
