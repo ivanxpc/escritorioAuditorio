@@ -53,7 +53,12 @@
                            </image>
                         </ImageView>
                         <TextField fx:id="buscar" layoutX="1036.0" layoutY="57.0" onKeyTyped="#buscarSolicitantes" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="445.0" AnchorPane.leftAnchor="1036.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="57.0" />
-                        <TableView fx:id="tabla" layoutX="27.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center; -fx-background-color: transparent;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="110.0">
+                        <ImageView fitHeight="358.0" fitWidth="1165.0" layoutX="29.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="110.0">
+                           <image>
+                              <Image url="@image/fondo.png" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tabla" layoutX="29.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center; -fx-background-color: transparent;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="110.0">
                           <columns>
                               <TableColumn fx:id="id" prefWidth="75.0" text="Folio" />
                             <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
@@ -69,8 +74,8 @@
                           </columns>
                         </TableView>
                         <Label layoutX="1093.0" layoutY="31.0" text="Buscar" AnchorPane.leftAnchor="1093.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="31.0" />
-                        <Button fx:id="continuar" disable="true" layoutX="1117.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="481.0" />
-                        <Button fx:id="actualizarS" layoutX="984.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="481.0" />
+                        <Button fx:id="continuar" disable="true" layoutX="1101.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" AnchorPane.leftAnchor="1101.0" AnchorPane.topAnchor="481.0" />
+                        <Button fx:id="actualizarS" layoutX="1077.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" AnchorPane.leftAnchor="1077.0" AnchorPane.topAnchor="481.0" />
                         <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="27.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="402.8333282470703" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="1027.0" AnchorPane.topAnchor="-10.0">
                            <image>
                               <Image url="@image/logoTecMM.png" />
