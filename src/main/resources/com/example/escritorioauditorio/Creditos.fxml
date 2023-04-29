@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="290.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.CreditosController">
+<AnchorPane prefHeight="352.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.CreditosController">
    <children>
       <Label layoutX="87.0" layoutY="14.0" text="Proyecto elaborado por:">
          <font>
@@ -17,7 +17,7 @@
       <Label layoutX="100.0" layoutY="41.0" text="Ivan Alejandro Padilla Cordova " />
       <Label layoutX="100.0" layoutY="58.0" text="Edgar Gael Alejandro Mora Enciso" />
       <Label layoutX="99.0" layoutY="75.0" text="Omar Alejandro Escobedo Ruiz " />
-      <Label layoutX="86.0" layoutY="108.0" text="Maestro y materia impartida:">
+      <Label layoutX="86.0" layoutY="108.0" text="Docente y materia asignada:">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,12 +34,12 @@
          </font>
       </Label>
       <Label layoutX="180.0" layoutY="209.0" text="6°E" />
-      <Label layoutX="106.0" layoutY="226.0" text="Institución educativa:">
+      <Label layoutX="106.0" layoutY="290.0" text="Institución educativa:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="253.0" text="Tecnologico Superior de Jalisco" />
+      <Label layoutX="105.0" layoutY="317.0" text="Tecnológico Superior de Jalisco" />
       <ImageView fitHeight="58.0" fitWidth="63.0" layoutX="333.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/logoTecMM.png" />
@@ -50,5 +50,11 @@
             <Image url="@image/triangulosMorados.PNG" />
          </image>
       </ImageView>
+      <Label layoutX="160.0" layoutY="233.0" text="Carrera">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="261.0" text="Ingeniería en sistemas computacionales " />
    </children>
 </AnchorPane>

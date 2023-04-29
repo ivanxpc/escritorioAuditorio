@@ -580,15 +580,12 @@ public class HelloController {
                 Stage stage = new Stage();//Crear una nueva ventana
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("enviarArchivo.fxml"));
                 Scene escena = new Scene(loader.load());
-                stage.setTitle("Finalizado");
+                stage.setTitle("ARCHIVO ENVIADO");
                 stage.setScene(escena);//agregar la esena a la ventana
                 stage.showAndWait();
             } catch (Exception d){
 
             }
-
-
-
 
         } catch (AddressException ex) {
             System.out.println("Error en el correo" + ex);
