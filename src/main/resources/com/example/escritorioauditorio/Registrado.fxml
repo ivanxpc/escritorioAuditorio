@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="125.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.Alerta_register">
+<AnchorPane prefHeight="116.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.Alerta_register">
    <children>
       <Button fx:id="aceptar" layoutX="154.0" layoutY="84.0" mnemonicParsing="false" onAction="#Cerrar" text="Continuar">
          <font>
@@ -15,14 +15,14 @@
          </font></Button>
       <Label layoutX="28.0" layoutY="23.0" text="El usuario se registro correctamente">
          <font>
-            <Font name="Malgun Gothic" size="20.0" />
+            <Font name="Malgun Gothic Bold" size="20.0" />
          </font></Label>
       <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/triangulosMorados.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="55.0" layoutX="330.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fitHeight="46.0" fitWidth="55.0" layoutX="330.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@image/triangulosMorados.PNG" />
          </image>

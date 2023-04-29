@@ -290,9 +290,7 @@ public class HelloController {
 
     @FXML
     public void CerrarSesion(){
-
         try {
-
             Stage test = (Stage) cerrar_Sesion.getScene().getWindow();
             test.close();
 
