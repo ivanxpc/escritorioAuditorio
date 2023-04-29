@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="101.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.errorCargaA">
+   <children>
+      <Label layoutX="106.0" layoutY="14.0" text="Error al enviar los archivos" />
+      <Label layoutX="81.0" layoutY="52.0" text="Revisa que sean los dos archivos requeridos" />
+   </children>
+</AnchorPane>

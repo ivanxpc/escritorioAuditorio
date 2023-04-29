@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="128.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.errorCorreo">
+   <children>
+      <Label layoutX="19.0" layoutY="55.0" text="Ha cocurrido un error con el correo o contraseña" />
+   </children>
+</AnchorPane>

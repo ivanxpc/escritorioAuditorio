@@ -23,10 +23,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Properties;
+import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -458,7 +460,7 @@ public class HelloController {
     public void deleteFile(ActionEvent evt) {
 
         if (datos != null) {
-            datos = new File("");
+            datos = null;
             System.out.println("Archivo eliminado");
             btn_archivo1.setDisable(true);
             archivo1L.setText("");
@@ -472,7 +474,7 @@ public class HelloController {
     public void deleteFile1(ActionEvent evt) {
 
         if(datos1 != null) {
-            datos1 = new File("");
+            datos1 = null;
             System.out.println("Archivo eliminado");
             btn_archivo2.setDisable(true);
             archivo2L.setText("");
@@ -480,16 +482,70 @@ public class HelloController {
 
         }
 
+
     }
+
+    //Nuevo metodo para enviar por correo metodo 2
+    @FXML
+    public void test(){
+
+        final String userName = "ipadillacordova@gmail.com"; //same fromMail
+        final String password = "kxljyvdjmmqvypad";
+        final String toEmail = "ipadillacordova@gmail.com";
+
+        System.out.println("TLSEmail Start");
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        // props.put("mail.smtp.ssl.enable", "true");
+        // props.put("mail.smtp.socketFactory.port", "587"); //TLS Port
+
+        //Session session = Session.getDefaultInstance(props);
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+
+                return new PasswordAuthentication("ipadillacordova@gmail.com", "kxljyvdjmmqvypad");
+
+            }
+        });
+
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("nalaivan123@hotmail.com", true));
+            message.setSubject("Prueba");
+            message.setText("Blablabla");
+            System.out.println("sending...");
+            Transport.send(message);
+            System.out.println("Sent message successfully....");
+
+        }catch (MessagingException me){
+            System.out.println("Exception: "+me);
+
+        }
+    }
+
+
 
 //Metodo para enviar por correo los archivos
     @FXML
     public void enviarArchivo_C(){
+        System.out.println("Valor datos: "+datos);
+        System.out.println("Valor datos1: "+datos1);
 
         try {
             Properties propiedades = new Properties();
 
-            propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+            propiedades.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+            propiedades.put("mail.smtp.port", "587"); //TLS Port
+            propiedades.put("mail.smtp.auth", "true"); //enable authentication
+            propiedades.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+            propiedades.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+            //Este tambien funciono anteriormente
+            /*propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
             propiedades.setProperty("mail.smtp.port", "465");
             propiedades.setProperty("mail.smtp.auth", "true");
             propiedades.setProperty("mail.smtp.starttls.enable", "true");
@@ -497,12 +553,13 @@ public class HelloController {
             propiedades.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
             propiedades.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-            Session sesion = Session.getDefaultInstance(propiedades);
+             */
 
+            Session sesion = Session.getDefaultInstance(propiedades);
 
             //Este si funciona
             String correo_emisor = "ipadillacordova@gmail.com";
-            String password_emisor = "rideprwxpzwbjpqc";
+            String password_emisor = "kxljyvdjmmqvypad";
 
 
 
@@ -520,63 +577,99 @@ public class HelloController {
             BodyPart texto = new MimeBodyPart();
             texto.setContent(mensaje,"text/html");
 
-            //Archivo1
-            BodyPart adjuntos = new MimeBodyPart();
-            //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
-            adjuntos.setDataHandler(new DataHandler(new FileDataSource(datos)));
-            adjuntos.setFileName("Archivo1.pdf");
-            //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
-            System.out.println("Archivo adjuntado!!");
-            MimeMultipart partes = new MimeMultipart();
-            partes.addBodyPart(texto);
-            partes.addBodyPart(adjuntos);
+            if (datos == null | datos1 == null){
+
+                System.out.println("Error al enviar los archivos");
+
+                try {
+                    Stage stage = new Stage();//Crear una nueva ventana
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("errorCargaAr.fxml"));
+                    Scene escena = new Scene(loader.load());
+                    stage.setScene(escena);
+                    stage.showAndWait();
+                } catch (Exception d){
+
+                }
 
 
-            //Archivo2
-            BodyPart adjuntos1 = new MimeBodyPart();
-            //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
-            adjuntos1.setDataHandler(new DataHandler(new FileDataSource(datos1)));
-            adjuntos1.setFileName("Archivo2.pdf");
-            //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
-            System.out.println("Archivo adjuntado!!");
-            MimeMultipart partes1 = new MimeMultipart();
-            partes1.addBodyPart(texto);
-            partes1.addBodyPart(adjuntos1);
+            }else {
+
+
+                //Archivo1
+                BodyPart adjuntos = new MimeBodyPart();
+                //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
+                adjuntos.setDataHandler(new DataHandler(new FileDataSource(datos)));
+                adjuntos.setFileName("Archivo1.pdf");
+                //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
+                System.out.println("Archivo adjuntado!!");
+                MimeMultipart partes = new MimeMultipart();
+                partes.addBodyPart(texto);
+                partes.addBodyPart(adjuntos);
+
+
+                //Archivo2
+                BodyPart adjuntos1 = new MimeBodyPart();
+                //adjuntos.setDataHandler(new DataHandler(new FileDataSource("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png"))); //Aqui pones la direccion de tu imagen
+                adjuntos1.setDataHandler(new DataHandler(new FileDataSource(datos1)));
+                adjuntos1.setFileName("Archivo2.pdf");
+                //imagen.setDataHandler(new DataHandler(new FileDataSourse("C:\\Users\\nalai\\OneDrive\\Escritorio/pdf.png")));
+                System.out.println("Archivo adjuntado!!");
+                MimeMultipart partes1 = new MimeMultipart();
+                partes1.addBodyPart(texto);
+                partes1.addBodyPart(adjuntos1);
 
 
 
 
-            //Correo de archivo1
-            MimeMessage message = new MimeMessage(sesion);
-            message.setFrom(new InternetAddress(correo_emisor));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
-            message.setSubject(asunto);
-            //message.setText(mensaje);
-            message.setContent(partes);
-
-            Transport transporte = sesion.getTransport("smtp");
-            transporte.connect(correo_emisor,password_emisor);
-            transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
-            transporte.close();
-
-            //Correo de archivo2
-            MimeMessage message1 = new MimeMessage(sesion);
-            message1.setFrom(new InternetAddress(correo_emisor));
-            message1.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
-            message1.setSubject(asunto);
-            message1.setContent(partes1);
-
-            Transport transporte1 = sesion.getTransport("smtp");
-            transporte1.connect(correo_emisor,password_emisor);
-            transporte1.sendMessage(message1 , message1.getRecipients(Message.RecipientType.TO));
-            transporte1.close();
 
 
-            System.out.println("El mensaje se ha enviado  . ");
+                //Correo de archivo1
+                MimeMessage message = new MimeMessage(sesion);
+                message.setFrom(new InternetAddress(correo_emisor));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+                message.setSubject(asunto);
+                //message.setText(mensaje);
+                message.setContent(partes);
 
+                Transport transporte = sesion.getTransport("smtp");
+                transporte.connect(correo_emisor,password_emisor);
+                transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
+                transporte.close();
+
+                //Correo de archivo2
+                MimeMessage message1 = new MimeMessage(sesion);
+                message1.setFrom(new InternetAddress(correo_emisor));
+                message1.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+                message1.setSubject(asunto);
+                message1.setContent(partes1);
+
+                Transport transporte1 = sesion.getTransport("smtp");
+                transporte1.connect(correo_emisor,password_emisor);
+                transporte1.sendMessage(message1 , message1.getRecipients(Message.RecipientType.TO));
+                transporte1.close();
+
+
+                System.out.println("El mensaje se ha enviado  . ");
+
+                try {
+                    Stage stage = new Stage();//Crear una nueva ventana
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("enviarArchivo.fxml"));
+                    Scene escena = new Scene(loader.load());
+                    stage.setTitle("ARCHIVOS ENVIADO");
+                    stage.setScene(escena);//agregar la esena a la ventana
+                    stage.showAndWait();
+                } catch (Exception d){
+
+                }
+
+            }
+
+
+        } catch (AddressException ex) {
+            System.out.println("Error en el correo" + ex);
             try {
                 Stage stage = new Stage();//Crear una nueva ventana
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("enviarArchivo.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("errorCoreoA.fxml"));
                 Scene escena = new Scene(loader.load());
                 stage.setTitle("ARCHIVO ENVIADO");
                 stage.setScene(escena);//agregar la esena a la ventana
@@ -584,13 +677,20 @@ public class HelloController {
             } catch (Exception d){
 
             }
-
-        } catch (AddressException ex) {
-            System.out.println("Error en el correo" + ex);
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
         } catch (MessagingException ex) {
             //JOptionPane.showMessageDialog(null,"Error : " +ex);
-            System.out.println("Error en el mensaje" + ex);
+            System.out.println("Error en el mensaje " + ex);
+            try {
+                Stage stage = new Stage();//Crear una nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("errorMensajeA.fxml"));
+                Scene escena = new Scene(loader.load());
+                stage.setTitle("ARCHIVO ENVIADO");
+                stage.setScene(escena);//agregar la esena a la ventana
+                stage.showAndWait();
+            } catch (Exception d){
+
+            }
         }
 
     }
