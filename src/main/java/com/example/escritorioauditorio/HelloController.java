@@ -169,9 +169,6 @@ public class HelloController {
     private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
     Document documento = new Document();
 
-
-
-
     public void initialize(){
         actualizarDatos();
         actualizarSolicitantes();
@@ -225,7 +222,6 @@ public class HelloController {
                             this.setBackground(new Background(fill));
                             this.setTextFill(Color.WHITESMOKE);
                         }
-
                 }
 
             } catch (Exception e) {
@@ -303,14 +299,23 @@ public class HelloController {
             Stage stage = new Stage();//Crear una nueva ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Scene escena = new Scene(loader.load());
-            stage.setTitle("Finalizado");
+            stage.setTitle("LOGIN");
             stage.setScene(escena);//agregar la esena a la ventana
             stage.showAndWait();
 
         } catch (Exception d){
 
         }
-
+    }
+    @FXML
+    public void MostrarCreditos()throws Exception{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Creditos.fxml"));
+        Scene escena = new Scene(loader.load());
+        stage.setTitle("Créditos");
+        stage.setResizable(false);
+        stage.setScene(escena);
+        stage.showAndWait();
     }
     @FXML
     public void descargarArchivo()throws Exception {
@@ -341,8 +346,9 @@ public class HelloController {
             Stage stage = new Stage();//Crear una nueva ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("descargaPDF.fxml"));
             Scene escena = new Scene(loader.load());
-            stage.setTitle("Finalizado");
-            stage.setScene(escena);//agregar la esena a la ventana
+            stage.setTitle("PDF DESCARGADO");
+            stage.setScene(escena);//agregar la escena a la ventana
+            stage.setResizable(false);
             stage.showAndWait();
         } catch (Exception d){
 
@@ -374,8 +380,9 @@ public class HelloController {
                     Stage stage = new Stage();//Crear una nueva ventana
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("errorAdjuntar.fxml"));
                     Scene escena = new Scene(loader.load());
-                    stage.setTitle("Finalizado");
-                    stage.setScene(escena);//agregar la ecena a la ventana
+                    stage.setTitle("ARCHIVO ADJUNTO");
+                    stage.setScene(escena);//agregar la escena a la ventana
+                    stage.setResizable(false);
                     stage.showAndWait();
                 } catch (Exception d) {
                     //System.out.println(d + "No se ha adjuntado ningun archivo");
@@ -387,8 +394,9 @@ public class HelloController {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
                     Scene escena = new Scene(loader.load());
-                    stage.setTitle("Finalizado");
+                    stage.setTitle("ARCHIVO ADJUNTO");
                     stage.setScene(escena);
+                    stage.setResizable(false);
                     stage.showAndWait();
                 } catch (Exception d) {
                     //System.out.println(d + "No se ha adjuntado ningun archivo");
@@ -415,8 +423,9 @@ public class HelloController {
                 Stage stage = new Stage();//Crear una nueva ventana
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("errorAdjuntar.fxml"));
                 Scene escena = new Scene(loader.load());
-                stage.setTitle("Finalizado");
-                stage.setScene(escena);//agregar la ecena a la ventana
+                stage.setTitle("ERROR");
+                stage.setScene(escena);//agregar la escena a la ventana
+                stage.setResizable(false);
                 stage.showAndWait();
             } catch (Exception d) {
 
@@ -427,8 +436,9 @@ public class HelloController {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
                 Scene escena = new Scene(loader.load());
-                stage.setTitle("Finalizado");
+                stage.setTitle("ARCHIVO ADJUNTO");
                 stage.setScene(escena);
+                stage.setResizable(false);
                 stage.showAndWait();
             } catch (Exception d) {
 
@@ -965,7 +975,8 @@ public class HelloController {
                 Stage stage = new Stage();//Crear una nueva ventana
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("crearPDF.fxml"));
                 Scene escena = new Scene(loader.load());
-                stage.setTitle("Finalizado");
+                stage.setTitle("PDF CREADO CORRECTAMENTE");
+                stage.setResizable(false);
                 stage.setScene(escena);//agregar la esena a la ventana
                 stage.showAndWait();
             } catch (Exception d){
@@ -979,6 +990,7 @@ public class HelloController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("error_PDF.fxml"));
                 Scene escena = new Scene(loader.load());
                 stage.setTitle("ERROR");
+                stage.setResizable(false);
                 stage.setScene(escena);//agregar la esena a la ventana
                 stage.showAndWait();
             } catch (Exception d){

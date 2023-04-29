@@ -34,22 +34,16 @@ public class loginController {
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
 
-        //Pattern patron = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
-        //Matcher mat = patron.matcher(usuario.getText());
-
-
             ConexionLogin BD = new ConexionLogin();
             String Val_PASSWORD = contraseña.getText();
             String Val_USER= usuario.getText();
             BD.ConectarBasedeDatos();
 
-            //String SQL = "SELECT id FROM usuarios" +
-                   // " WHERE nombre='"+Val_USER+"'OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
             String SQL = "SELECT id FROM usuarios" +
-                " WHERE nombre='"+Val_USER+"'AND password='"+Val_PASSWORD+"'";
+                " WHERE nombre='"+Val_USER+"' OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
             BD.resultado = BD.sentencia.executeQuery(SQL);
 
-            if (BD.resultado.next() && contraseña.getText()!="") {
+            if (BD.resultado.next()) {
 
                 Stage s = (Stage) aceptar.getScene().getWindow();
                 s.close();
@@ -60,15 +54,6 @@ public class loginController {
                 stage.setScene(escena);
                 stage.show();
             }else{
-                /*
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("errorLogin.fxml"));
-                stage.setTitle("ERROR");
-                Scene escena = new Scene(loader.load());
-                stage.setScene(escena);
-                stage.show();
-                 */
-
                 labAlerta.setVisible(true);
                 labAlerta.setText("Usuario o contraseña incorrecto(a)");
                 //Thread.sleep(5000);

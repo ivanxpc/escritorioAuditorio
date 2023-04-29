@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.util.regex.*;
-
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -36,7 +35,6 @@ public class registerController {
         Pattern patron_correo, patron_usuario, patron_contraseña;
         Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        //patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com)");
         patron_correo = Pattern.compile("[a-zA-Z0-9_.]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
         mat_correo = patron_correo.matcher(correo.getText());
 
@@ -62,6 +60,7 @@ public class registerController {
             stage.setTitle("REGISTRO CORRECTO");
             Scene escena = new Scene(loader.load());
             stage.setScene(escena);
+            stage.setResizable(false);
             stage.showAndWait();
 
             Stage CV = (Stage) registrar.getScene().getWindow();
@@ -73,13 +72,6 @@ public class registerController {
             ST.setScene(sc);
             ST.show();
         }else{
-            /*
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("UsuarioInvalido.fxml"));
-            Scene escena = new Scene(loader.load());
-            stage.setScene(escena);
-            stage.showAndWait();
-             */
 
             labAlerta.setVisible(true);
             labAlerta.setText("Formato de correo no valido");
