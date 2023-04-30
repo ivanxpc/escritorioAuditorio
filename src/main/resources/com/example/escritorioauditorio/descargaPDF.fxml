@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="99.0" prefWidth="222.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.descargaPDF_Controller">
+<AnchorPane prefHeight="141.0" prefWidth="229.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.descargaPDF_Controller">
    <children>
       <Label layoutX="15.0" layoutY="27.0" prefHeight="29.0" prefWidth="204.0" text="DESCARGA EXITOSA">
          <font>
@@ -17,12 +17,12 @@
             <Image url="@image/triangulosMorados.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="62.0" layoutX="170.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fitHeight="49.0" fitWidth="62.0" layoutX="171.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@image/triangulosMorados.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="105.0" layoutX="94.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="105.0" layoutX="95.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/PDF_descargado2.jpg" />
          </image>
