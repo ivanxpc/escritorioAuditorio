@@ -27,5 +27,10 @@
             <Image url="@image/PDF_descargado2.jpg" />
          </image>
       </ImageView>
+      <Label layoutX="27.0" layoutY="53.0" text="revisa tu carpeta de &quot;Descargas&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

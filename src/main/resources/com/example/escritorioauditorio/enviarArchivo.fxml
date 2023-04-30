@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="54.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.exitoAdjuntar">
+<AnchorPane prefHeight="85.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.exitoAdjuntar">
    <children>
-      <Label layoutX="53.0" layoutY="21.0" text="Se ha enviado correctamente!!" />
+      <Label layoutX="33.0" layoutY="28.0" text="Se ha enviado correctamente">
+         <font>
+            <Font name="Malgun Gothic" size="20.0" />
+         </font></Label>
+      <ImageView fitHeight="37.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/triangulosMorados.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

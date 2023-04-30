@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="128.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.errorCorreo">
+<AnchorPane prefHeight="88.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.errorCorreo">
    <children>
-      <Label layoutX="19.0" layoutY="55.0" text="Ha cocurrido un error con el correo o contraseña" />
+      <Label layoutX="25.0" layoutY="31.0" text="Ocurrió un error con el correo o contraseña">
+         <font>
+            <Font name="Malgun Gothic Bold" size="18.0" />
+         </font></Label>
+      <ImageView fitHeight="53.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/triangulosMorados.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
