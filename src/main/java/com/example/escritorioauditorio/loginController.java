@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
+
 import java.util.regex.*;
 
 public class loginController {
@@ -17,7 +20,9 @@ public class loginController {
     @FXML
     private TextField contraseñaTF;
     @FXML
-    private CheckBox mostrar;
+    private ImageView mostrar;
+    @FXML
+    private ImageView ocultar;
     @FXML
     private Button aceptar;
     @FXML
@@ -50,6 +55,7 @@ public class loginController {
 
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                stage.setResizable(false);
                 Scene escena = new Scene(loader.load());
                 stage.setScene(escena);
                 stage.show();
@@ -64,16 +70,20 @@ public class loginController {
     }
 
     @FXML
-    void visible(ActionEvent evt){
-        if(mostrar.isSelected()){
-            contraseñaTF.setText(contraseña.getText());
+    public void visible(){
+        if (ocultar.isVisible()){
+            ocultar.setVisible(false);
+            mostrar.setVisible(true);
             contraseñaTF.setVisible(true);
             contraseña.setVisible(false);
-            return;
+            contraseñaTF.setText(contraseña.getText());
+        }else if (mostrar.isVisible()) {
+            mostrar.setVisible(false);
+            ocultar.setVisible(true);
+            contraseñaTF.setVisible(false);
+            contraseña.setVisible(true);
+            contraseña.setText(contraseñaTF.getText());
         }
-        contraseña.setText(contraseñaTF.getText());
-        contraseña.setVisible(true);
-        contraseñaTF.setVisible(false);
     }
 
     @FXML
@@ -84,6 +94,7 @@ public class loginController {
         //ABRIR OTRA VENTANA
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
+        stage.setResizable(false);
         Scene escena = new Scene(loader.load());
         stage.setScene(escena);
         stage.show();
