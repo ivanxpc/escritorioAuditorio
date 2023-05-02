@@ -241,10 +241,59 @@ public class HelloController {
 
 
 
+
+
+    public void nombres(LocalDate item, boolean empty) {
+
+
+
+
+        int day ;
+        int month;
+        int year;
+
+
+        try {
+            Connection c = ConexionBD.getConexion();
+            Statement stm = c.createStatement();
+            String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+            ResultSet r = stm.executeQuery(sql);
+            //stm.execute(sql);
+
+            while(r.next()){
+                day = item.getDayOfMonth();
+                month = item.getMonthValue();
+                year = item.getYear();
+                //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+
+                if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                    Paint color = Color.RED;
+                    BackgroundFill fill = new BackgroundFill(color, null, null);
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
     @FXML
     public void actualizarSolicitantes(){
         actualizarDatos();
     }
+
+
 //Actualizar datos de la tabla
     public void actualizarDatos(){
 
@@ -268,6 +317,8 @@ public class HelloController {
                         r.getString("fecha"),
                         r.getString("Contacto"),
                         r.getString("fechaAgenda")));
+
+
 
 
                 id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -795,8 +846,10 @@ public class HelloController {
         try {
 
 
-            String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Videos/Auditorio.pdf"));
+           // String ruta = System.getProperty("user.home");
+            //C:\Users\nalai\OneDrive\Escritorio
+            PdfWriter.getInstance(documento, new FileOutputStream(  "C:\\Users\\nalai\\OneDrive\\Escritorio/Auditorio.pdf"));
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Videos/Auditorio.pdf"));
             //Insertar image
 
             Image logo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
@@ -1087,6 +1140,7 @@ public class HelloController {
                 stage.setResizable(false);
                 stage.setScene(escena);//agregar la esena a la ventana
                 stage.showAndWait();
+                tabGeneral.getSelectionModel().select(2);
             } catch (Exception d){
 
             }
@@ -1113,7 +1167,7 @@ public class HelloController {
             System.out.println("Error en la imagen" + e);
         }
 
-        tabGeneral.getSelectionModel().select(2);
+
 
 
 
