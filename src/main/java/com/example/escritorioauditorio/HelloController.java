@@ -166,7 +166,6 @@ public class HelloController {
         Platform.exit();
     }
 
-
     private datos_usuario temporalSolicitantes;
 
     private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
@@ -239,19 +238,11 @@ public class HelloController {
         }
     };
 
-
-
-
-
     public void nombres(LocalDate item, boolean empty) {
-
-
-
 
         int day ;
         int month;
         int year;
-
 
         try {
             Connection c = ConexionBD.getConexion();
@@ -280,14 +271,6 @@ public class HelloController {
     }
 
 
-
-
-
-
-
-
-
-
     @FXML
     public void actualizarSolicitantes(){
         actualizarDatos();
@@ -296,7 +279,6 @@ public class HelloController {
 
 //Actualizar datos de la tabla
     public void actualizarDatos(){
-
         try {
             Connection c = ConexionBD.getConexion();
             Statement stm = c.createStatement();
@@ -317,9 +299,6 @@ public class HelloController {
                         r.getString("fecha"),
                         r.getString("Contacto"),
                         r.getString("fechaAgenda")));
-
-
-
 
                 id.setCellValueFactory(new PropertyValueFactory<>("id"));
                 nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -356,6 +335,9 @@ public class HelloController {
             stage.setScene(escena);//agregar la esena a la ventana
             stage.showAndWait();
 
+            ConexionLogin BD = new ConexionLogin();
+            BD.DesconectarBasedeDatos();
+            System.out.println("SESION CERRADA");
         } catch (Exception d){
 
         }
@@ -370,6 +352,13 @@ public class HelloController {
         stage.setResizable(false);
         stage.setScene(escena);
         stage.showAndWait();
+    }
+    @FXML
+    public void AbrirManualdeUso()throws Exception{
+        String direccion = "C:\\Users\\omara\\OneDrive\\Escritorio\\Formulario.pdf";
+        ProcessBuilder archivo = new ProcessBuilder();
+        archivo.command("cmd.exe","/c",direccion);
+        archivo.start();
     }
     @FXML
     public void descargarArchivo()throws Exception {

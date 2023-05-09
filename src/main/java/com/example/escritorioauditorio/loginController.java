@@ -35,6 +35,8 @@ public class loginController {
     private Label labAlertaContrasena;
     @FXML
     private Label labAlertaCorreo;
+    @FXML
+    private Label labAlertaEsperar;
 
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
@@ -45,7 +47,7 @@ public class loginController {
             BD.ConectarBasedeDatos();
 
             String SQL = "SELECT id FROM usuarios" +
-                " WHERE nombre='"+Val_USER+"' OR correo='"+Val_USER+"' AND password='"+Val_PASSWORD+"'";
+                " WHERE nombre='"+Val_USER+"' AND password= '"+Val_PASSWORD+"'";
             BD.resultado = BD.sentencia.executeQuery(SQL);
 
             if (BD.resultado.next()) {
@@ -66,7 +68,11 @@ public class loginController {
                 //labAlerta.setText("");
                 labAlertaContrasena.setVisible(false);
                 labAlertaCorreo.setVisible(false);
+                labAlertaEsperar.setText("");
+                aceptar.setDisable(false);
             }
+            aceptar.setDisable(true);
+            labAlertaEsperar.setText("Espere un momento...");
     }
 
     @FXML

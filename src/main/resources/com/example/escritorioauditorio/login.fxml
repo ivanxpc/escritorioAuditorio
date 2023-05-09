@@ -59,6 +59,7 @@
                   <Image url="@image/ojoOculta.png" />
                </image>
             </ImageView>
+            <Label fx:id="labAlertaEsperar" layoutX="39.0" layoutY="322.0" />
          </children>
       </AnchorPane>
    </children>
