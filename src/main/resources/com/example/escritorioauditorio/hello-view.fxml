@@ -29,14 +29,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Acerca de">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#AbrirManualdeUso" text="Manual de uso" />
                   <MenuItem mnemonicParsing="false" onAction="#MostrarCreditos" text="Créditos" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Otros">
               <items>
-                <MenuItem mnemonicParsing="false" text="Ayuda" />
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarApp" text="Cerrar " />
+                <MenuItem mnemonicParsing="false" onAction="#AbrirManualdeUso" text="Manual de uso" />
               </items>
             </Menu>
          </menus></MenuBar>

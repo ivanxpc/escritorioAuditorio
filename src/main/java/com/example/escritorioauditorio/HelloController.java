@@ -365,15 +365,17 @@ public class HelloController {
         //Esta es mi dirrrecion de Ivan PC
         //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
-        String ruta = System.getProperty("user.home");
-         ruta = "C:\\Users\\nalai\\Downloads\\Formulario.pdf";
+        //String ruta = System.getProperty("user.home");
+         //ruta = "C:\\Users\\nalai\\Downloads\\Formulario.pdf";
+        //String ruta = System.getProperty("user.home");
+        String ruta = "C:\\Users\\"+System.getProperty("user.name")+"\\Downloads\\Formulario.pdf";
 
 
         //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
         //Esta es mi dirrrecion de Ivan PC
+        Image imagen = Image.getInstance(System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
         //Image imagen = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
-        Image imagen = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/PDF.jpg");
         imagen.scaleToFit(600,1100);
         imagen.setAlignment(Chunk.ALIGN_JUSTIFIED);
 
@@ -837,15 +839,16 @@ public class HelloController {
 
            // String ruta = System.getProperty("user.home");
             //C:\Users\nalai\OneDrive\Escritorio
-            PdfWriter.getInstance(documento, new FileOutputStream(  "C:\\Users\\nalai\\OneDrive\\Escritorio/Auditorio.pdf"));
+            //PdfWriter.getInstance(documento, new FileOutputStream(  "C:\\Users\\nalai\\OneDrive\\Escritorio/Auditorio.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(  "C:\\Users\\"+System.getProperty("user.name")+"\\Downloads/Auditorio.pdf"));
             //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Videos/Auditorio.pdf"));
             //Insertar image
 
-            Image logo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
+            Image logo = Image.getInstance("C:\\Users\\"+System.getProperty("user.name")+"\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
             logo.scaleToFit(250,250);
             logo.setAlignment(Chunk.ALIGN_CENTER);
 
-            Image bordo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
+            Image bordo = Image.getInstance("C:\\Users\\"+System.getProperty("user.name")+"\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
             bordo.scaleToFit(300,300);
             logo.setAlignment(Chunk.ALIGN_BOTTOM);
 
@@ -938,12 +941,12 @@ public class HelloController {
             //tabla.addCell("Folio");
 
             try {
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auditorio","root","");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://65.99.252.253:3306/eduwitco_auditorio","eduwitco_auditorio","Ivan.098&$%");
+                //Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auditorio","root","");
                 //PreparedStatement pst = cn.prepareStatement("SELECT * FROM datosusuario");
                 PreparedStatement pst = cn.prepareStatement("SELECT * FROM datosusuario WHERE id= " + idSolicitantes );
 
                 ResultSet rs = pst.executeQuery();
-
                 if (rs.next()){
 
                     do {
@@ -1149,16 +1152,10 @@ public class HelloController {
 
             }
 
-
             System.out.println("Error en generar PDFfffff" + e);
 
         }catch (IOException e){
             System.out.println("Error en la imagen" + e);
         }
-
-
-
-
-
     }
 }
