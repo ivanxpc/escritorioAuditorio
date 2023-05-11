@@ -843,11 +843,13 @@ public class HelloController {
             //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Videos/Auditorio.pdf"));
             //Insertar image
 
-            Image logo = Image.getInstance("C:\\Users\\"+System.getProperty("user.name")+"\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
+            //Image logo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
+            Image logo = Image.getInstance(System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/logoTecMM.png");
             logo.scaleToFit(250,250);
             logo.setAlignment(Chunk.ALIGN_CENTER);
 
-            Image bordo = Image.getInstance("C:\\Users\\"+System.getProperty("user.name")+"\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
+            //Image bordo = Image.getInstance("C:\\Users\\nalai\\IdeaProjects\\escritorioAuditorio\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
+            Image bordo = Image.getInstance(System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/triangulosMorados.png");
             bordo.scaleToFit(300,300);
             logo.setAlignment(Chunk.ALIGN_BOTTOM);
 
