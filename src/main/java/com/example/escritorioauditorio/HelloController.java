@@ -370,7 +370,6 @@ public class HelloController {
         //String ruta = System.getProperty("user.home");
         String ruta = "C:\\Users\\"+System.getProperty("user.name")+"\\Downloads\\Formulario.pdf";
 
-
         //String File_name = "C:\\Users\\nalai\\OneDrive\\Escritorio\\Formulario.pdf";
 
         //Esta es mi dirrrecion de Ivan PC
