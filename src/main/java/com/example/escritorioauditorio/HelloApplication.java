@@ -18,7 +18,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Agendas del Auditorio");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {
