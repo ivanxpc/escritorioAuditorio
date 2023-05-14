@@ -32,7 +32,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#MostrarCreditos" text="Créditos" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Otros">
+            <Menu mnemonicParsing="false" text="Ayuda">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#AbrirManualdeUso" text="Manual de uso" />
               </items>
