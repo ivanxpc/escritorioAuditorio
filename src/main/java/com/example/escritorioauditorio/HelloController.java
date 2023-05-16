@@ -355,7 +355,7 @@ public class HelloController {
     }
     @FXML
     public void AbrirManualdeUso()throws Exception{
-        String direccion =System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image\\Manual de usuario.pdf";
+        String direccion = "C:\\Users\\omara\\OneDrive\\Escritorio\\Formulario.pdf";
         ProcessBuilder archivo = new ProcessBuilder();
         archivo.command("cmd.exe","/c",direccion);
         archivo.start();
@@ -753,7 +753,7 @@ public class HelloController {
     int idSolicitantes;
     @FXML
     public void ClickTablaSolicitantes(MouseEvent evt){
-        if(evt.getClickCount() >= 2){
+        if(evt.getClickCount() >= 1){
                 datos_usuario p = (datos_usuario) tabla.getSelectionModel().getSelectedItem();
                 temporalSolicitantes = p;
                 idSolicitantes = p.getId();

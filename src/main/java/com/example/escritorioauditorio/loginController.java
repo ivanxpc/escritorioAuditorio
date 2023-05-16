@@ -38,19 +38,22 @@ public class loginController {
     @FXML
     private Label labAlertaEsperar;
 
+    //Metodo para hacer login
     @FXML
     public void Aceptar(ActionEvent evt)throws Exception{
+        try {
 
             ConexionLogin BD = new ConexionLogin();
             String Val_PASSWORD = contraseña.getText();
-            String Val_USER= usuario.getText();
+            String Val_USER = usuario.getText();
             BD.ConectarBasedeDatos();
 
             String SQL = "SELECT id FROM usuarios" +
-                " WHERE nombre='"+Val_USER+"' AND password= '"+Val_PASSWORD+"'";
+                    " WHERE nombre='" + Val_USER + "' AND password= '" + Val_PASSWORD + "'";
             BD.resultado = BD.sentencia.executeQuery(SQL);
 
             if (BD.resultado.next()) {
+                aceptar.setDisable(true);
 
                 Stage s = (Stage) aceptar.getScene().getWindow();
                 s.close();
@@ -61,7 +64,8 @@ public class loginController {
                 Scene escena = new Scene(loader.load());
                 stage.setScene(escena);
                 stage.show();
-            }else{
+            } else {
+                aceptar.setVisible(true);
                 labAlerta.setVisible(true);
                 labAlerta.setText("Usuario o contraseña incorrecto(a)");
                 //Thread.sleep(5000);
@@ -73,6 +77,10 @@ public class loginController {
             }
             aceptar.setDisable(true);
             labAlertaEsperar.setText("Espere un momento...");
+        }catch (Exception e){
+            System.out.println("error");
+
+        }
     }
 
     @FXML
