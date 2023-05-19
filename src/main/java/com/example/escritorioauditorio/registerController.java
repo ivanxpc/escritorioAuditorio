@@ -31,54 +31,64 @@ public class registerController {
 
     @FXML
     public void AgregarUsuarios(ActionEvent evt)throws Exception{
+        try {
 
-        Pattern patron_correo, patron_usuario, patron_contraseña;
-        Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        patron_correo = Pattern.compile("[a-zA-Z0-9_.]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
-        mat_correo = patron_correo.matcher(correo.getText());
+            Pattern patron_correo, patron_usuario, patron_contraseña;
+            Matcher mat_correo, mat_usuario, mat_contaseña;
 
-        patron_usuario = Pattern.compile("[A-Za-z0-9_.]*");
-        mat_usuario = patron_usuario.matcher(usuario.getText());
+            patron_correo = Pattern.compile("[a-zA-Z0-9_.]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
+            mat_correo = patron_correo.matcher(correo.getText());
 
-        patron_contraseña = Pattern.compile("[A-Za-z0-9_.]*");
-        mat_contaseña = patron_contraseña.matcher(contraseña.getText());
+            patron_usuario = Pattern.compile("[A-Za-z0-9_.]*");
+            mat_usuario = patron_usuario.matcher(usuario.getText());
 
-        if(mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()){
-            Connection c = ConexionBD.getConexion();
-            Statement stm = c.createStatement();
-            String SQL = "INSERT INTO usuarios VALUES(0,'"+usuario.getText()+ "','"+correo.getText()+"','"
-                    +contraseña.getText()+"')";
-            stm.execute(SQL);
+            patron_contraseña = Pattern.compile("[A-Za-z0-9_.]*");
+            mat_contaseña = patron_contraseña.matcher(contraseña.getText());
 
-            correo.setText("");
-            usuario.setText("");
-            contraseña.setText("");
+            if (mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()) {
+                Connection c = ConexionBD.getConexion();
+                Statement stm = c.createStatement();
+                String SQL = "INSERT INTO usuarios VALUES(0,'" + usuario.getText() + "','" + correo.getText() + "','"
+                        + contraseña.getText() + "')";
+                stm.execute(SQL);
 
+                correo.setText("");
+                usuario.setText("");
+                contraseña.setText("");
+
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Registrado.fxml"));
+                stage.setTitle("REGISTRO CORRECTO");
+                Scene escena = new Scene(loader.load());
+                stage.setScene(escena);
+                stage.setResizable(false);
+                stage.showAndWait();
+
+                Stage CV = (Stage) registrar.getScene().getWindow();
+                CV.close();
+
+                Stage ST = new Stage();
+                FXMLLoader load = new FXMLLoader(getClass().getResource("login.fxml"));
+                Scene sc = new Scene(load.load());
+                ST.setScene(sc);
+                ST.show();
+            } else {
+
+                labAlerta.setVisible(true);
+                labAlerta.setText("Formato de correo no valido");
+                //Thread.sleep(5000);
+                //labAlerta.setText("");
+                //labAlertaContrasena.setVisible(false);
+                //labAlertaCorreo.setVisible(false);
+            }
+        }catch (Exception e){
+            System.out.println("Error");
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Registrado.fxml"));
-            stage.setTitle("REGISTRO CORRECTO");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("errorConexionF.fxml"));
             Scene escena = new Scene(loader.load());
             stage.setScene(escena);
-            stage.setResizable(false);
-            stage.showAndWait();
-
-            Stage CV = (Stage) registrar.getScene().getWindow();
-            CV.close();
-
-            Stage ST = new Stage();
-            FXMLLoader load = new FXMLLoader(getClass().getResource("login.fxml"));
-            Scene sc = new Scene(load.load());
-            ST.setScene(sc);
-            ST.show();
-        }else{
-
-            labAlerta.setVisible(true);
-            labAlerta.setText("Formato de correo no valido");
-            //Thread.sleep(5000);
-            //labAlerta.setText("");
-            //labAlertaContrasena.setVisible(false);
-            //labAlertaCorreo.setVisible(false);
+            stage.show();
         }
     }
 
