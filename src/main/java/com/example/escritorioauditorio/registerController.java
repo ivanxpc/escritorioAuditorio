@@ -28,25 +28,25 @@ public class registerController {
     @FXML
     private Label labAlerta;
 
-
     @FXML
     public void AgregarUsuarios(ActionEvent evt)throws Exception{
         try {
-
-
             Pattern patron_correo, patron_usuario, patron_contraseña;
             Matcher mat_correo, mat_usuario, mat_contaseña;
 
-            patron_correo = Pattern.compile("[a-zA-Z0-9_.]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
+            patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
             mat_correo = patron_correo.matcher(correo.getText());
 
-            patron_usuario = Pattern.compile("[A-Za-z0-9_.]*");
+            patron_usuario = Pattern.compile("[A-Za-z0-9_]*");
             mat_usuario = patron_usuario.matcher(usuario.getText());
 
-            patron_contraseña = Pattern.compile("[A-Za-z0-9_.]*");
+            patron_contraseña = Pattern.compile("[A-Za-z0-9_]*");
             mat_contaseña = patron_contraseña.matcher(contraseña.getText());
 
-            if (mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()) {
+            if(correo.getText() == "" || usuario.getText() == "" || contraseña.getText() == ""){
+                labAlerta.setVisible(true);
+                labAlerta.setText("llene todos los campos vacios");
+            }else if (mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()) {
                 Connection c = ConexionBD.getConexion();
                 Statement stm = c.createStatement();
                 String SQL = "INSERT INTO usuarios VALUES(0,'" + usuario.getText() + "','" + correo.getText() + "','"
@@ -74,7 +74,6 @@ public class registerController {
                 ST.setScene(sc);
                 ST.show();
             } else {
-
                 labAlerta.setVisible(true);
                 labAlerta.setText("Formato de correo no valido");
                 //Thread.sleep(5000);
