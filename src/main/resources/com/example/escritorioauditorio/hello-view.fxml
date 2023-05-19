@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="581.0" maxWidth="1204.0" minHeight="581.0" minWidth="1204.0" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="581.0" maxWidth="1204.0" minHeight="581.0" minWidth="1204.0" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <menus>
@@ -56,7 +56,7 @@
                               <Image url="@image/fondo.png" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="tabla" layoutX="29.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center; -fx-background-color: transparent;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="110.0">
+                        <TableView fx:id="tabla" layoutX="29.0" layoutY="110.0" onMouseClicked="#ClickTablaSolicitantes" onSort="#actualizarDatos" prefHeight="358.0" prefWidth="1165.0" style="-fx-background-position: center; -fx-background-color: transparent;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="110.0">
                           <columns>
                               <TableColumn fx:id="id" prefWidth="75.0" text="Folio" />
                             <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
@@ -73,12 +73,16 @@
                         </TableView>
                         <Label layoutX="1093.0" layoutY="31.0" text="Buscar" AnchorPane.leftAnchor="1093.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="31.0" />
                         <Button fx:id="continuar" disable="true" layoutX="1101.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" AnchorPane.leftAnchor="1101.0" AnchorPane.topAnchor="481.0" />
-                        <Button fx:id="actualizarS" layoutX="968.0" layoutY="481.0" mnemonicParsing="false" onAction="#actualizarSolicitantes" text="Actualizar registros" AnchorPane.leftAnchor="968.0" AnchorPane.topAnchor="481.0" />
                         <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="27.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="402.8333282470703" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="1027.0" AnchorPane.topAnchor="-10.0">
                            <image>
                               <Image url="@image/logoTecMM.png" />
                            </image>
                         </ImageView>
+                        <Label fx:id="error_Conexion" layoutX="493.0" layoutY="468.0" text="Verifica tu conexión a internet" textFill="#f41505">
+                           <font>
+                              <Font name="Javanese Text" size="18.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -206,6 +210,24 @@
                         <Label fx:id="archivo2L" layoutX="888.0" layoutY="246.0" />
                         <Button fx:id="adjuntar1" layoutX="942.0" layoutY="270.0" mnemonicParsing="false" onAction="#adjuntarArchivo_C1" text="Adjuntar" />
                      </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Cambiar correos">
+               <content>
+                  <AnchorPane prefHeight="400.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="9.0" layoutY="25.0" text="Introduce tus correos electronicos y contraseña, para enviar y recibir los correos con los archivos del solicitante" />
+                        <Label layoutX="87.0" layoutY="94.0" text="Datos del emisor" />
+                        <Label layoutX="415.0" layoutY="94.0" text="Datos del receptor" />
+                        <Label layoutX="111.0" layoutY="131.0" text="Coreo electronico:" />
+                        <Label layoutX="111.0" layoutY="200.0" text="Contraseña:" />
+                        <Label layoutX="416.0" layoutY="140.0" text="Coreo electronico:" />
+                        <Button fx:id="guardarDatosCorreo" layoutX="276.0" layoutY="298.0" mnemonicParsing="false" onAction="#seleccionarCorreo_password" text="GUARDAR" />
+                        <TextField fx:id="correoEmisor" layoutX="84.0" layoutY="157.0" />
+                        <TextField fx:id="paswordEmisor" layoutX="85.0" layoutY="235.0" />
+                        <TextField fx:id="correoReceptor" layoutX="390.0" layoutY="183.0" />
+                     </children>
+                  </AnchorPane>
                </content>
             </Tab>
         </tabs>

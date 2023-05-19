@@ -11,7 +11,7 @@ import org.w3c.dom.events.MouseEvent;
 
 import java.util.regex.*;
 
-public class loginController {
+public class loginController extends Thread{
 
     @FXML
     private TextField usuario;
@@ -38,15 +38,27 @@ public class loginController {
     @FXML
     private Label labAlertaEsperar;
 
+
+
+        public void run(){
+            try {
+                Aceptar();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            visible();
+        }
+
     //Metodo para hacer login
     @FXML
-    public void Aceptar(ActionEvent evt)throws Exception{
+    public void Aceptar()throws Exception{
         try {
 
             ConexionLogin BD = new ConexionLogin();
             String Val_PASSWORD = contraseña.getText();
             String Val_USER = usuario.getText();
             BD.ConectarBasedeDatos();
+
 
             String SQL = "SELECT id FROM usuarios" +
                     " WHERE nombre='" + Val_USER + "' AND password= '" + Val_PASSWORD + "'";
@@ -62,8 +74,11 @@ public class loginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
                 stage.setResizable(false);
                 Scene escena = new Scene(loader.load());
+                stage.setTitle("Agendas del Auditorio");
                 stage.setScene(escena);
                 stage.show();
+                aceptar.setDisable(true);
+                labAlertaEsperar.setText("Espere un momento...");
             } else {
                 aceptar.setVisible(true);
                 labAlerta.setVisible(true);
@@ -75,10 +90,16 @@ public class loginController {
                 labAlertaEsperar.setText("");
                 aceptar.setDisable(false);
             }
-            aceptar.setDisable(true);
-            labAlertaEsperar.setText("Espere un momento...");
+
         }catch (Exception e){
-            System.out.println("error");
+
+            System.out.println(e+"error");
+            Stage stage = new Stage();//Crear una nueva ventana
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("errorConexionF.fxml"));
+            stage.setResizable(false);
+            Scene escena = new Scene(loader.load());
+            stage.setScene(escena);//agregar la esena a la ventana
+            stage.showAndWait();
 
         }
     }

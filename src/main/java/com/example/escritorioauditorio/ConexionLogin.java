@@ -9,6 +9,7 @@ public class ConexionLogin{
 
     public void ConectarBasedeDatos() {
         try {
+
             //Original
             //final String url_bd = "jdbc:mysql://localhost:3306/auditorio";
             final String url_bd = "jdbc:mysql://65.99.252.253:3306/eduwitco_auditorio";
