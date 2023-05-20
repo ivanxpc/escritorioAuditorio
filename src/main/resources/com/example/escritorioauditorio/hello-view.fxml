@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -45,12 +46,23 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="47.0" fitWidth="186.0" layoutX="1027.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="539.0" fitWidth="1222.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/buscar.PNG" />
+                              <Image url="@image/IMG_7207.PNG" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="buscar" layoutX="1036.0" layoutY="57.0" onKeyTyped="#buscarSolicitantes" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="445.0" AnchorPane.leftAnchor="1036.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="57.0" />
+                        <Separator layoutX="231.0" layoutY="21.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="0.0" style="-fx-background-color: purple;" />
+                        <Label layoutX="260.0" layoutY="41.0" prefHeight="25.0" prefWidth="187.0" text="Tabla de folios">
+                           <font>
+                              <Font name="Ebrima Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="260.0" layoutY="70.0" text="Agendas registradas">
+                           <font>
+                              <Font name="Ebrima" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="buscar" layoutX="999.0" layoutY="47.0" onKeyTyped="#buscarSolicitantes" AnchorPane.bottomAnchor="455.0" AnchorPane.leftAnchor="999.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="47.0" />
                         <ImageView fitHeight="358.0" fitWidth="1165.0" layoutX="29.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="110.0">
                            <image>
                               <Image url="@image/fondo.png" />
@@ -71,16 +83,19 @@
                               <TableColumn fx:id="fAgenda" minWidth="0.0" prefWidth="128.7999267578125" text="Fecha de agenda " />
                           </columns>
                         </TableView>
-                        <Label layoutX="1093.0" layoutY="31.0" text="Buscar" AnchorPane.leftAnchor="1093.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="31.0" />
+                        <Label layoutX="1053.0" layoutY="25.0" prefHeight="18.0" prefWidth="46.0" text="Buscar" AnchorPane.leftAnchor="1053.0" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="25.0">
+                           <font>
+                              <Font name="Ebrima Bold" size="14.0" />
+                           </font></Label>
                         <Button fx:id="continuar" disable="true" layoutX="1101.0" layoutY="481.0" mnemonicParsing="false" onAction="#siguiente" text="Continuar" AnchorPane.leftAnchor="1101.0" AnchorPane.topAnchor="481.0" />
-                        <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="27.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="402.8333282470703" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="1027.0" AnchorPane.topAnchor="-10.0">
+                        <ImageView disable="true" fitHeight="136.0" fitWidth="150.0" layoutX="44.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/logoTecMM.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="error_Conexion" layoutX="493.0" layoutY="468.0" text="Verifica tu conexión a internet" textFill="#f41505">
+                        <Label fx:id="error_Conexion" layoutX="497.0" layoutY="483.0" text="Verifica tu conexión a internet" textFill="#f41505">
                            <font>
-                              <Font name="Javanese Text" size="18.0" />
+                              <Font name="Ebrima Bold" size="18.0" />
                            </font>
                         </Label>
                      </children></AnchorPane>
@@ -92,6 +107,11 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
+                              <ImageView fitHeight="535.0" fitWidth="1211.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/IMG_7207.PNG" />
+                                 </image>
+                              </ImageView>
                               <Label layoutX="421.0" layoutY="172.0" prefHeight="25.0" prefWidth="95.0" text="Mobiliario" AnchorPane.rightAnchor="688.0" AnchorPane.topAnchor="172.0">
                                  <font>
                                     <Font name="Ebrima Bold" size="18.0" />
@@ -107,19 +127,19 @@
                                     <Font name="Ebrima Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="25.0" prefHeight="25.0" prefWidth="187.0" text="Costo por evento" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="25.0">
+                              <Label layoutX="260.0" layoutY="41.0" prefHeight="25.0" prefWidth="187.0" text="Costo por evento">
                                  <font>
                                     <Font name="Ebrima Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="50.0" text="Internos: sin costo" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0">
+                              <Label layoutX="260.0" layoutY="70.0" text="Internos: sin costo">
                                  <font>
                                     <Font name="Ebrima" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="67.0" text="Externos: 1,500" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="67.0" />
+                              <Label layoutX="260.0" layoutY="87.0" text="Externos: 1,500" />
                               <DatePicker fx:id="Calendario" layoutX="39.0" layoutY="177.0" prefHeight="25.0" prefWidth="324.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="177.0" />
-                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="1034.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="404.0" AnchorPane.leftAnchor="1034.0" AnchorPane.rightAnchor="7.8881988525390625" AnchorPane.topAnchor="-22.0">
+                              <ImageView fitHeight="145.0" fitWidth="190.0" layoutX="44.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@image/logoTecMM.png" />
                                  </image>
@@ -171,6 +191,7 @@
                               <TextField fx:id="Nota" layoutX="618.0" layoutY="313.0" prefHeight="92.0" prefWidth="380.0" promptText="                                            Nota (Cantidad)" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="313.0" />
                               <Button layoutX="941.0" layoutY="415.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="Agendar" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="415.0" />
                               <Label layoutX="94.0" layoutY="141.0" text="Seleciona la fecha de agenda: " AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="141.0" />
+                              <Separator layoutX="231.0" layoutY="21.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="0.0" style="-fx-background-color: purple;" />
                            </children>
                         </AnchorPane>
                      </items>
@@ -181,34 +202,55 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="469.0" fitWidth="508.0" layoutX="344.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="14.0">
+                        <ImageView fitHeight="548.0" fitWidth="1204.0" layoutX="49.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@image/IMG_7207.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="446.0" fitWidth="446.0" layoutX="393.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/background.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="446.0" fitWidth="446.0" layoutX="393.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/background.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="383.0" fitWidth="479.0" layoutX="398.818115234375" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="369.9546203613281" AnchorPane.topAnchor="78.0">
                            <image>
                               <Image url="@image/PDF.jpg" />
                            </image>
                         </ImageView>
                         <Button fx:id="subir" layoutX="710.0" layoutY="477.0" mnemonicParsing="false" onAction="#enviarArchivo_C" text="Enviar" AnchorPane.rightAnchor="446.0" AnchorPane.topAnchor="477.0" />
                         <Button fx:id="descargar" layoutX="783.0" layoutY="477.0" mnemonicParsing="false" onAction="#descargarArchivo" text="Descargar" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="477.0" />
-                        <ImageView fitHeight="215.0" fitWidth="192.0" layoutX="1028.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="14.0">
-                           <image>
-                              <Image url="@image/triangulosMorados.PNG" />
-                           </image>
-                        </ImageView>
-                        <Button fx:id="adjuntar" layoutX="943.6" layoutY="477.0" mnemonicParsing="false" onAction="#adjunatarArechivo_C" text="Adjuntar" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="477.0" />
-                        <ImageView fx:id="archivo1" disable="true" fitHeight="98.0" fitWidth="79.0" layoutX="866.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                        <Button fx:id="adjuntar" layoutX="243.0" layoutY="448.0" mnemonicParsing="false" onAction="#adjunatarArechivo_C" text="Adjuntar" AnchorPane.rightAnchor="899.0" AnchorPane.topAnchor="448.0" />
+                        <ImageView fx:id="archivo1" disable="true" fitHeight="98.0" fitWidth="79.0" layoutX="195.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@image/archivo.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="archivo2" disable="true" fitHeight="98.0" fitWidth="79.0" layoutX="863.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                        <ImageView fx:id="archivo2" disable="true" fitHeight="98.0" fitWidth="79.0" layoutX="194.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@image/archivo.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="btn_archivo1" disable="true" layoutX="876.0" layoutY="476.0" mnemonicParsing="false" onAction="#deleteFile" text="Eliminar" />
-                        <Button fx:id="btn_archivo2" disable="true" layoutX="873.0" layoutY="270.0" mnemonicParsing="false" onAction="#deleteFile1" text="Eliminar" />
-                        <Label fx:id="archivo1L" layoutX="891.0" layoutY="452.0" />
-                        <Label fx:id="archivo2L" layoutX="888.0" layoutY="246.0" />
-                        <Button fx:id="adjuntar1" layoutX="942.0" layoutY="270.0" mnemonicParsing="false" onAction="#adjuntarArchivo_C1" text="Adjuntar" />
+                        <Button fx:id="btn_archivo1" disable="true" layoutX="166.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteFile" text="Eliminar" />
+                        <Button fx:id="btn_archivo2" disable="true" layoutX="164.0" layoutY="275.0" mnemonicParsing="false" onAction="#deleteFile1" text="Eliminar" />
+                        <Label fx:id="archivo1L" layoutX="119.0" layoutY="419.0" />
+                        <Label fx:id="archivo2L" layoutX="116.0" layoutY="244.0" />
+                        <Button fx:id="adjuntar1" layoutX="242.0" layoutY="274.0" mnemonicParsing="false" onAction="#adjuntarArchivo_C1" text="Adjuntar" />
+                        <Label layoutX="260.0" layoutY="41.0" text="PDF">
+                           <font>
+                              <Font name="Ebrima Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="44.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/logoTecMM.png" />
+                           </image>
+                        </ImageView>
+                        <Separator layoutX="231.0" layoutY="21.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="0.0" style="-fx-background-color: purple;" />
                      </children></AnchorPane>
                </content>
             </Tab>
@@ -216,16 +258,54 @@
                <content>
                   <AnchorPane prefHeight="400.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="9.0" layoutY="25.0" text="Introduce tus correos electronicos y contraseña, para enviar y recibir los correos con los archivos del solicitante" />
-                        <Label layoutX="87.0" layoutY="94.0" text="Datos del emisor" />
-                        <Label layoutX="415.0" layoutY="94.0" text="Datos del receptor" />
-                        <Label layoutX="111.0" layoutY="131.0" text="Coreo electronico:" />
-                        <Label layoutX="111.0" layoutY="200.0" text="Contraseña:" />
-                        <Label layoutX="416.0" layoutY="140.0" text="Coreo electronico:" />
-                        <Button fx:id="guardarDatosCorreo" layoutX="276.0" layoutY="298.0" mnemonicParsing="false" text="GUARDAR" />
-                        <TextField fx:id="correoEmisor" layoutX="84.0" layoutY="157.0" />
-                        <TextField fx:id="paswordEmisor" layoutX="85.0" layoutY="235.0" />
-                        <TextField fx:id="correoReceptor" layoutX="390.0" layoutY="183.0" />
+                        <ImageView fitHeight="540.0" fitWidth="1207.0" layoutX="5.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@image/IMG_7207.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="260.0" layoutY="41.0" text="Correos">
+                           <font>
+                              <Font name="Ebrima Bold" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="317.0" layoutY="160.0" text="Datos del emisor">
+                           <font>
+                              <Font name="Ebrima Bold" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="699.0" layoutY="160.0" text="Datos del receptor">
+                           <font>
+                              <Font name="Ebrima Bold" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="311.0" layoutY="211.0" text="Correo electronico:">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="331.0" layoutY="310.0" text="Contraseña:">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="703.0" layoutY="211.0" text="Correo electronico:">
+                           <font>
+                              <Font name="Ebrima" size="14.0" />
+                           </font></Label>
+                        <Button fx:id="guardarDatosCorreo" layoutX="816.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="GUARDAR" />
+                        <TextField fx:id="correoEmisor" layoutX="186.0" layoutY="243.0" prefHeight="25.0" prefWidth="337.0" />
+                        <TextField fx:id="paswordEmisor" layoutX="186.0" layoutY="342.0" prefHeight="25.0" prefWidth="337.0" />
+                        <TextField fx:id="correoReceptor" layoutX="591.0" layoutY="243.0" prefHeight="25.0" prefWidth="337.0" />
+                        <Label layoutX="260.0" layoutY="70.0" text="Introduce tus correos electronicos y contraseña">
+                           <font>
+                              <Font name="Ebrima" size="12.0" />
+                           </font></Label>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="44.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/logoTecMM.png" />
+                           </image>
+                        </ImageView>
+                        <Separator layoutX="231.0" layoutY="21.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="0.0" style="-fx-background-color: purple;" />
+                        <Label layoutX="257.0" layoutY="87.0" text=" para enviar y recibir los correos con los archivos del solicitante">
+                           <font>
+                              <Font name="Ebrima" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
