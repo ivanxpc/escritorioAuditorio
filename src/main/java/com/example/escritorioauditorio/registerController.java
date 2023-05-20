@@ -37,42 +37,39 @@ public class registerController {
             patron_correo = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.](mx||com||edu)");
             mat_correo = patron_correo.matcher(correo.getText());
 
-            patron_usuario = Pattern.compile("[A-Za-z0-9_]*");
+            patron_usuario = Pattern.compile("\\D[A-Za-z0-9]{4,15}");
             mat_usuario = patron_usuario.matcher(usuario.getText());
 
-            patron_contraseña = Pattern.compile("[A-Za-z0-9_]*");
+            patron_contraseña = Pattern.compile("[A-Za-z0-9_]{5,20}");
             mat_contaseña = patron_contraseña.matcher(contraseña.getText());
 
-            if(correo.getText() == "" || usuario.getText() == "" || contraseña.getText() == ""){
-                labAlerta.setVisible(true);
-                labAlerta.setText("llene todos los campos vacios");
-            }else if (mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()) {
-                Connection c = ConexionBD.getConexion();
-                Statement stm = c.createStatement();
-                String SQL = "INSERT INTO usuarios VALUES(0,'" + usuario.getText() + "','" + correo.getText() + "','"
-                        + contraseña.getText() + "')";
-                stm.execute(SQL);
+            if (mat_usuario.matches() && mat_correo.matches() && mat_contaseña.matches()) {
+                    Connection c = ConexionBD.getConexion();
+                    Statement stm = c.createStatement();
+                    String SQL = "INSERT INTO usuarios VALUES(0,'" + usuario.getText() + "','" + correo.getText() + "','"
+                            + contraseña.getText() + "')";
+                    stm.execute(SQL);
 
-                correo.setText("");
-                usuario.setText("");
-                contraseña.setText("");
+                    correo.setText("");
+                    usuario.setText("");
+                    contraseña.setText("");
 
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Registrado.fxml"));
-                stage.setTitle("REGISTRO CORRECTO");
-                Scene escena = new Scene(loader.load());
-                stage.setScene(escena);
-                stage.setResizable(false);
-                stage.showAndWait();
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Registrado.fxml"));
+                    stage.setTitle("REGISTRO CORRECTO");
+                    Scene escena = new Scene(loader.load());
+                    stage.setScene(escena);
+                    stage.setResizable(false);
+                    stage.showAndWait();
 
-                Stage CV = (Stage) registrar.getScene().getWindow();
-                CV.close();
+                    Stage CV = (Stage) registrar.getScene().getWindow();
+                    CV.close();
 
-                Stage ST = new Stage();
-                FXMLLoader load = new FXMLLoader(getClass().getResource("login.fxml"));
-                Scene sc = new Scene(load.load());
-                ST.setScene(sc);
-                ST.show();
+                    Stage ST = new Stage();
+                    FXMLLoader load = new FXMLLoader(getClass().getResource("login.fxml"));
+                    Scene sc = new Scene(load.load());
+                    ST.setScene(sc);
+                    ST.show();
             } else {
                 labAlerta.setVisible(true);
                 labAlerta.setText("Formato de correo no valido");

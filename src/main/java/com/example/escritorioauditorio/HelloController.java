@@ -355,7 +355,7 @@ public class HelloController {
     }
     @FXML
     public void AbrirManualdeUso()throws Exception{
-        String direccion = "C:\\Users\\omara\\OneDrive\\Escritorio\\Formulario.pdf";
+        String direccion = System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/Manual de usuario.pdf";
         ProcessBuilder archivo = new ProcessBuilder();
         archivo.command("cmd.exe","/c",direccion);
         archivo.start();
