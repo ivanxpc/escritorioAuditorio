@@ -355,6 +355,7 @@ public class HelloController {
     }
     @FXML
     public void AbrirManualdeUso()throws Exception{
+        //RUTA GENERAL - Permite abrir el documento en cualquier computadora
         String direccion = System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/Manual de usuario.pdf";
         ProcessBuilder archivo = new ProcessBuilder();
         archivo.command("cmd.exe","/c",direccion);
