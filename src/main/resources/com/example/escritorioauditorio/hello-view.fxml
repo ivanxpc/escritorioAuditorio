@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="581.0" maxWidth="1204.0" minHeight="581.0" minWidth="1204.0" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
+<AnchorPane maxHeight="581.0" maxWidth="1204.0" minHeight="581.0" minWidth="1204.0" prefHeight="581.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escritorioauditorio.HelloController">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <menus>
@@ -287,7 +287,7 @@
                            <font>
                               <Font name="Ebrima" size="14.0" />
                            </font></Label>
-                        <Button fx:id="guardarDatosCorreo" layoutX="816.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="GUARDAR" />
+                        <Button fx:id="guardarDatosCorreo" layoutX="816.0" layoutY="419.0" mnemonicParsing="false" onAction="#seleccionarCorreo_password" prefHeight="25.0" prefWidth="112.0" text="GUARDAR" />
                         <TextField fx:id="correoEmisor" layoutX="186.0" layoutY="243.0" prefHeight="25.0" prefWidth="337.0" />
                         <TextField fx:id="paswordEmisor" layoutX="186.0" layoutY="342.0" prefHeight="25.0" prefWidth="337.0" />
                         <TextField fx:id="correoReceptor" layoutX="591.0" layoutY="243.0" prefHeight="25.0" prefWidth="337.0" />

@@ -118,6 +118,8 @@ public class HelloController {
     private Label archivo1L;
     @FXML
     private Label archivo2L;
+    @FXML
+    private Label espereEnviar;
 
     //Folio
 
@@ -153,12 +155,33 @@ public class HelloController {
     private TextField buscar;
     @FXML
     private Button continuar;
+    @FXML
+    private Label error_Conexion;
 
     //sesion
     @FXML
     private MenuItem cerrar_s;
     @FXML
     private Button cerrar_Sesion;
+
+    //TAB Cambiar Correos
+
+    @FXML
+    private TextField correoEmisor;
+    @FXML
+    private TextField paswordEmisor;
+    @FXML
+    private TextField correoReceptor;
+    @FXML
+    private Button guardarDatosCorreo;
+
+    //Variables para guardar los correos y password
+
+    public static String datosCorreo_Emisor;
+    public static String datospassword_Emisor;
+    public static String datosCorreo_Receptor;
+
+
 
     //MenuBar
     @FXML
@@ -171,13 +194,204 @@ public class HelloController {
     private  ObservableList<datos_usuario> bd_usuarioDatos = FXCollections.observableArrayList();
     Document documento = new Document();
 
+
+    hiloActualizar_Tabla hiloTabla = new hiloActualizar_Tabla();
+    hiloCalendario hiloCalendario = new hiloCalendario();
+    hiloBuscar hiloBuscar = new hiloBuscar();
+    loginController hiloLogin = new loginController();
+
+    String correoEmisorF;
+    String passwordEmisorF;
+    String correoReceptorF;
+
     public void initialize(){
-        actualizarDatos();
-        actualizarSolicitantes();
-        //DatePicker fecha = new DatePicker();
+        hiloBuscar.start();
+        //Metodo para leer el archivo creado
+         correoEmisorF =  deserializarObjeto("EstadoCorreoE.Dat", String.class);
+        System.out.println("Correo Emisor: "+correoEmisorF);
+         passwordEmisorF =  deserializarObjeto("EstadoPasswordE.Dat", String.class);
+        System.out.println("Password Emisor: "+passwordEmisorF);
+         correoReceptorF =  deserializarObjeto("EstadoCorreoR.Dat", String.class);
+        System.out.println("Correo Receptor: "+correoReceptorF);
+
+
+        //hiloCalendario.start();
+        //hiloTabla.start();
+
+        //actualizarDatos();
+        //actualizarSolicitantes();
+        DatePicker fecha = new DatePicker();
         Calendario.setDayCellFactory(dayCellFactory);
+        //hiloCalendario.start();
     }
-    DatePicker fecha = new DatePicker();
+
+    //Declaracion de Threads
+
+
+    private class hiloBuscar extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                // Pero usamos un truco y hacemos un ciclo infinito
+                try {
+                    // En él, hacemos que el hilo duerma
+                    Thread.sleep(1000);
+                    // Y después realizamos las operaciones
+                    // System.out.println("Me imprimo cada segundo");
+
+                    System.out.println("Hilo buscar");
+                    buscarSolicitantes();
+
+                    if (buscar.getText().trim().length() >= 1){
+                        hiloTabla.interrupt();
+                        System.out.println("Hilo tabla parado");
+                        if (hiloTabla.isInterrupted()){
+                            System.out.println("Alto final");
+                        }else {
+                            //hiloTabla.start();
+                        }
+                        /*if (hiloTabla.isAlive()){
+                            hiloTabla.interrupt();
+                            //buscarSolicitantes();
+                            System.out.println("Alto hilo tabla");
+                        }else {
+                            //hiloTabla.start();
+                            System.out.println("No hizo nada");
+                        }*/
+                    } /*else if (buscar.getText().trim().length() != 1) {
+                        //hiloTabla.start();
+
+                    }
+                    */
+
+
+
+                    // Así, se da la impresión de que se ejecuta cada cierto tiempo
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+        }
+
+    }
+
+    private class hiloActualizar_Tabla extends Thread {
+        @Override
+        public void run() {
+            actualizarDatos();
+
+           /* while (true) {
+
+
+                // Pero usamos un truco y hacemos un ciclo infinito
+                try {
+
+                    // En él, hacemos que el hilo duerma
+                    Thread.sleep(1000);
+
+
+
+                    if (buscar.getText().trim().length() >= 1){
+                        hiloTabla.interrupt();
+                        System.out.println("Hilo tabla parado hilooo");
+                    }
+                    if (hiloTabla.isInterrupted()){
+                        // hiloTabla.interrupt();
+                        System.out.println("Se ha detenido el proceso de actualizar");
+
+                    }else {
+                        // Esto se ejecuta en segundo plano una única vez
+                        while (true) {
+                            // Pero usamos un truco y hacemos un ciclo infinito
+                            try {
+                                actualizarDatos();
+                                // En él, hacemos que el hilo duerma
+                                Thread.sleep(5000);
+                                // Y después realizamos las operaciones
+                                System.out.println("Me imprimo cada segundo");
+                                // Así, se da la impresión de que se ejecuta cada cierto tiempo
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }*/
+            //hiloTabla.interrupt();
+
+
+
+        }
+
+
+    }
+
+    private class hiloCalendario extends Thread {
+        @Override
+        public void run() {
+
+            DatePicker fecha = new DatePicker();
+
+            Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+
+                public void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    this.setDisable(false);
+                    this.setBackground(null);
+                    this.setTextFill(Color.BLACK);
+
+
+                    int day;
+                    int month;
+                    int year;
+
+
+                    try {
+                        ConexionBD.getConexion();
+                        Statement stm = ConexionBD.c.createStatement();
+                        //Connection c = ConexionBD.getConexion();
+                        //Statement stm = ConexionBD.c.createStatement();
+                        String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+                        ResultSet r = stm.executeQuery(sql);
+                        //stm.execute(sql);
+
+                        while (r.next()) {
+                            day = item.getDayOfMonth();
+                            month = item.getMonthValue();
+                            year = item.getYear();
+                            //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+
+                            if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                                Paint color = Color.RED;
+                                BackgroundFill fill = new BackgroundFill(color, null, null);
+                                this.setBackground(new Background(fill));
+                                this.setTextFill(Color.WHITESMOKE);
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+            Calendario.setDayCellFactory(dayCellFactory);
+
+
+        }
+
+    }
+
+
+    //DatePicker fecha = new DatePicker();
 
     Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
 
@@ -188,21 +402,11 @@ public class HelloController {
             this.setBackground(null);
             this.setTextFill(Color.BLACK);
 
-            // deshabilitar las fechas futuras
-            /*if (item.isAfter(LocalDate.now())) {
-                this.setDisable(true);
-            }
 
-             */
 
             int day ;
             int month;
             int year;
-
-            //day == Calendario.getValue().getDayOfMonth())
-            //fecha.setOnAction(e -> System.out.println("fecha: " +  fecha.getValue()));
-            //fAgenda.getText();
-            //System.out.println(fAgenda);
 
             //String valor;
             try {
@@ -229,46 +433,10 @@ public class HelloController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            // fines de semana en color verde
-            DayOfWeek dayweek = item.getDayOfWeek();
-            if (dayweek == DayOfWeek.SATURDAY || dayweek == DayOfWeek.SUNDAY) {
-                this.setTextFill(Color.GREEN);
-            }
         }
     };
 
-    public void nombres(LocalDate item, boolean empty) {
 
-        int day ;
-        int month;
-        int year;
-
-        try {
-            Connection c = ConexionBD.getConexion();
-            Statement stm = c.createStatement();
-            String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
-            ResultSet r = stm.executeQuery(sql);
-            //stm.execute(sql);
-
-            while(r.next()){
-                day = item.getDayOfMonth();
-                month = item.getMonthValue();
-                year = item.getYear();
-                //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
-
-                if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
-                    Paint color = Color.RED;
-                    BackgroundFill fill = new BackgroundFill(color, null, null);
-
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     @FXML
@@ -280,8 +448,8 @@ public class HelloController {
 //Actualizar datos de la tabla
     public void actualizarDatos(){
         try {
-            Connection c = ConexionBD.getConexion();
-            Statement stm = c.createStatement();
+            ConexionBD.getConexion();
+            Statement stm = ConexionBD.c.createStatement();
             String sql = "SELECT * FROM datosusuario";
             ResultSet r = stm.executeQuery(sql);
             bd_usuarioDatos.clear();
@@ -314,8 +482,11 @@ public class HelloController {
 
             }
             stm.execute(sql);
+            System.out.println("DATOS ACTUALIZADOS");
+            error_Conexion.setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error de conexion a internet");
         }
         tabla.refresh();
 
@@ -355,7 +526,6 @@ public class HelloController {
     }
     @FXML
     public void AbrirManualdeUso()throws Exception{
-        //RUTA GENERAL - Permite abrir el documento en cualquier computadora
         String direccion = System.getProperty("user.dir")+"\\src\\main\\resources\\com\\example\\escritorioauditorio\\image/Manual de usuario.pdf";
         ProcessBuilder archivo = new ProcessBuilder();
         archivo.command("cmd.exe","/c",direccion);
@@ -536,7 +706,7 @@ public class HelloController {
     }
 
     //Nuevo metodo para enviar por correo metodo 2
-    @FXML
+    /*@FXML
     public void test(){
 
         final String userName = "ipadillacordova@gmail.com"; //same fromMail
@@ -577,6 +747,8 @@ public class HelloController {
         }
     }
 
+     */
+
 
 
 //Metodo para enviar por correo los archivos
@@ -585,7 +757,9 @@ public class HelloController {
         System.out.println("Valor datos: "+datos);
         System.out.println("Valor datos1: "+datos1);
 
+
         try {
+
             Properties propiedades = new Properties();
 
             propiedades.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
@@ -608,8 +782,11 @@ public class HelloController {
             Session sesion = Session.getDefaultInstance(propiedades);
 
             //Este si funciona
-            String correo_emisor = "ipadillacordova@gmail.com";
-            String password_emisor = "kxljyvdjmmqvypad";
+            //String correo_emisor = "ipadillacordova@gmail.com";
+            //String password_emisor = "kxljyvdjmmqvypad";
+            String correo_emisor = correoEmisorF;
+            String password_emisor = passwordEmisorF;
+
 
 
 
@@ -620,7 +797,11 @@ public class HelloController {
             String asunto = "Esto es una prueba";
 
              */
-            String correo_receptor = "ipadillacordova@gmail.com";
+
+
+
+            String correo_receptor = correoReceptorF;
+            //String correo_receptor = "ipadillacordova@gmail.com";
             String asunto = "Archivos del Solicitante";
             String mensaje = "Solicitud y formulario <br> Auditorio Tec de Chapala <br> <i>Archivos del solicitante: </i>";
 
@@ -630,6 +811,13 @@ public class HelloController {
             if (datos == null | datos1 == null){
 
                 System.out.println("Error al enviar los archivos");
+
+                    /*espereEnviar.setVisible(false);
+                    subir.setDisable(false);
+
+                     */
+
+
 
                 try {
                     Stage stage = new Stage();//Crear una nueva ventana
@@ -701,13 +889,14 @@ public class HelloController {
 
 
                 System.out.println("El mensaje se ha enviado  . ");
+                ;
 
                 try {
                     Stage stage = new Stage();//Crear una nueva ventana
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("enviarArchivo.fxml"));
                     stage.setResizable(false);
                     Scene escena = new Scene(loader.load());
-                    stage.setTitle("ARCHIVOS ENVIADO");
+                    stage.setTitle("ARCHIVOS ENVIADOS");
                     stage.setScene(escena);//agregar la esena a la ventana
                     stage.showAndWait();
                 } catch (Exception d){
@@ -772,9 +961,10 @@ public class HelloController {
 
     @FXML
     public void buscarSolicitantes() {
-        Connection c = ConexionBD.getConexion();
+        //Connection c = ConexionBD.getConexion();
         try {
-            Statement stm = c.createStatement();
+            ConexionBD.getConexion();
+            Statement stm = ConexionBD.c.createStatement();
             String sql = "SELECT * FROM datosusuario WHERE nombre LIKE '" + buscar.getText() + "%'";
             ResultSet r = stm.executeQuery(sql);
             bd_usuarioDatos.clear();
@@ -807,8 +997,10 @@ public class HelloController {
                 fAgenda.setCellValueFactory(new PropertyValueFactory<>("fechaAgenda"));
             }
             stm.execute(sql);
+            error_Conexion.setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
+            error_Conexion.setVisible(true);
         }
     }
     //Metodo para generar PDF
@@ -1160,4 +1352,54 @@ public class HelloController {
             System.out.println("Error en la imagen" + e);
         }
     }
+    //Metodo para asiganar las variables a los datos de correo
+    @FXML
+    public void seleccionarCorreo_password() {
+        datosCorreo_Emisor = (correoEmisor.getText());
+        datospassword_Emisor = (paswordEmisor.getText());
+        datosCorreo_Receptor = (correoReceptor.getText());
+
+        //System.out.println("Correo emisor: " + datosCorreo_Emisor);
+        //System.out.println("Password emisor: " + datospassword_Emisor);
+        //System.out.println("Correo recptor: " + datosCorreo_Receptor);
+
+        serializarObjeto("EstadoCorreoE.Dat",correoEmisor.getText());
+        serializarObjeto("EstadoPasswordE.Dat",paswordEmisor.getText());
+        serializarObjeto("EstadoCorreoR.Dat",correoReceptor.getText());
+
+        //Metodo para leer el archivo creado
+        correoEmisorF =  deserializarObjeto("EstadoCorreoE.Dat", String.class);
+        System.out.println("Correo Emisor: "+correoEmisorF);
+        passwordEmisorF =  deserializarObjeto("EstadoPasswordE.Dat", String.class);
+        System.out.println("Password Emisor: "+passwordEmisorF);
+        correoReceptorF =  deserializarObjeto("EstadoCorreoR.Dat", String.class);
+        System.out.println("Correo Receptor: "+correoReceptorF);
+
+
+    }
+
+    public static boolean serializarObjeto(String direccionArchivo, Serializable objeto) {
+        boolean sw = false;
+        try (FileOutputStream fos = new FileOutputStream(direccionArchivo);
+             ObjectOutputStream salida = new ObjectOutputStream(fos);) {
+            salida.writeObject(objeto);
+            sw = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sw;
+    }
+
+    public static <E> E deserializarObjeto(String direccionArchivo, Class<E> claseObjetivo) {
+        E objeto = null;
+        try (FileInputStream fis = new FileInputStream(direccionArchivo);
+             ObjectInputStream entrada = new ObjectInputStream(fis);) {
+            objeto = (E) entrada.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return objeto;
+    }
+
+
 }
