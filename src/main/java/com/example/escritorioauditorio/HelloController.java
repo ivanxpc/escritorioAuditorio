@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,22 +14,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.security.InvalidParameterException;
 import java.sql.*;
-import java.time.DayOfWeek;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Properties;
-import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -39,8 +39,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
 import javafx.util.Callback;
 
 public class HelloController {
@@ -59,8 +57,9 @@ public class HelloController {
 
     @FXML
     private TextField Nota;
+    DatePicker fechas = new DatePicker();
     @FXML
-    private DatePicker Calendario;
+    private DatePicker Calendario = fechas ;
     @FXML
     private Button btn_Agendar;
     @FXML
@@ -196,7 +195,7 @@ public class HelloController {
 
 
     hiloActualizar_Tabla hiloTabla = new hiloActualizar_Tabla();
-    hiloCalendario hiloCalendario = new hiloCalendario();
+    //hiloCalendario hiloCalendario = new hiloCalendario();
     hiloBuscar hiloBuscar = new hiloBuscar();
     loginController hiloLogin = new loginController();
 
@@ -205,7 +204,10 @@ public class HelloController {
     String correoReceptorF;
 
     public void initialize(){
-        hiloBuscar.start();
+        nuevoMetodoCal();
+        buscarSolicitantes();
+
+         hiloBuscar.start();
         //Metodo para leer el archivo creado
          correoEmisorF =  deserializarObjeto("EstadoCorreoE.Dat", String.class);
         System.out.println("Correo Emisor: "+correoEmisorF);
@@ -215,15 +217,14 @@ public class HelloController {
         System.out.println("Correo Receptor: "+correoReceptorF);
 
 
-        //hiloCalendario.start();
-        //hiloTabla.start();
+        //Esto es tambien del calendario Date piker
 
-        //actualizarDatos();
-        //actualizarSolicitantes();
-        DatePicker fecha = new DatePicker();
-        Calendario.setDayCellFactory(dayCellFactory);
-        //hiloCalendario.start();
+
+
+
     }
+
+
 
     //Declaracion de Threads
 
@@ -235,7 +236,7 @@ public class HelloController {
                 // Pero usamos un truco y hacemos un ciclo infinito
                 try {
                     // En él, hacemos que el hilo duerma
-                    Thread.sleep(1000);
+                    Thread.sleep(10000);
                     // Y después realizamos las operaciones
                     // System.out.println("Me imprimo cada segundo");
 
@@ -333,90 +334,45 @@ public class HelloController {
 
     }
 
-    private class hiloCalendario extends Thread {
-        @Override
-        public void run() {
-
-            DatePicker fecha = new DatePicker();
-
-            Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
-
-                public void updateItem(LocalDate item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    this.setDisable(false);
-                    this.setBackground(null);
-                    this.setTextFill(Color.BLACK);
 
 
-                    int day;
-                    int month;
-                    int year;
+    //  ESTO ES UNA COPIA
+
+    /*
+     @FXML
+    public void metodoCalendario(){
+
+        Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
 
 
-                    try {
-                        ConexionBD.getConexion();
-                        Statement stm = ConexionBD.c.createStatement();
-                        //Connection c = ConexionBD.getConexion();
-                        //Statement stm = ConexionBD.c.createStatement();
-                        String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
-                        ResultSet r = stm.executeQuery(sql);
-                        //stm.execute(sql);
+            // public void updateItem(LocalDate item, boolean empty) {
+            public void updateItem(LocalDate item, boolean empty) {
 
-                        while (r.next()) {
-                            day = item.getDayOfMonth();
-                            month = item.getMonthValue();
-                            year = item.getYear();
-                            //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
-
-                            if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
-                                Paint color = Color.RED;
-                                BackgroundFill fill = new BackgroundFill(color, null, null);
-                                this.setBackground(new Background(fill));
-                                this.setTextFill(Color.WHITESMOKE);
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-            Calendario.setDayCellFactory(dayCellFactory);
+                System.out.println("Metodo updateItem!!");
+                super.updateItem(item, empty);
 
 
-        }
-
-    }
-
-
-    //DatePicker fecha = new DatePicker();
-
-    Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
-
-        public void updateItem(LocalDate item, boolean empty) {
-            super.updateItem(item, empty);
-
-            this.setDisable(false);
-            this.setBackground(null);
-            this.setTextFill(Color.BLACK);
+                this.setDisable(false);
+                this.setBackground(null);
+                this.setTextFill(Color.BLACK);
 
 
 
-            int day ;
-            int month;
-            int year;
+                int day ;
+                int month;
+                int year;
 
-            //String valor;
-            try {
-                Connection c = ConexionBD.getConexion();
-                Statement stm = c.createStatement();
-                String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
-                ResultSet r = stm.executeQuery(sql);
-                //stm.execute(sql);
+                //String valor;
+                try {
+                    Connection c = ConexionBD.getConexion();
+                    Statement stm = c.createStatement();
+                    String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+                    ResultSet r = stm.executeQuery(sql);
+                    System.out.println("Conexion");
+                    //stm.execute(sql);
 
-                while(r.next()){
+                    while(r.next()){
+                        System.out.println("Metodo while");
                         day = item.getDayOfMonth();
                         month = item.getMonthValue();
                         year = item.getYear();
@@ -424,17 +380,229 @@ public class HelloController {
 
                         if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
                             Paint color = Color.RED;
+                            System.out.println("Metodo if");
                             BackgroundFill fill = new BackgroundFill(color, null, null);
                             this.setBackground(new Background(fill));
                             this.setTextFill(Color.WHITESMOKE);
+
                         }
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+
+
+                //updateSelected(true);
+                //updater.accept(item);
             }
+
+
+
+
+        };
+        Calendario.setDayCellFactory(dayCellFactory);
+
+    }
+     */
+
+
+    ResultSet r;
+    @FXML
+    public void nuevoMetodoCal() {
+
+
+        Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+
+            public void updateItem(LocalDate item, boolean empty) {
+
+                super.updateItem(item, empty);
+
+                this.setDisable(false);
+                this.setBackground(null);
+                this.setTextFill(Color.BLACK);
+
+                int day;
+                int month;
+                int year;
+                int entrada =1;
+                int es;
+                es = item.getDayOfMonth();
+
+                //System.out.println("Imprimir");
+
+                // marcar los dias de quincena
+
+
+
+                  /*day = item.getDayOfMonth();
+                  month = item.getMonthValue();
+                  year = item.getYear();
+
+                   */
+                if (entrada == 1) {
+
+
+
+                    try {
+                        ConexionBD.getConexion();
+                        Statement stm = ConexionBD.c.createStatement();
+                        String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+                        ResultSet r = stm.executeQuery(sql);
+                        System.out.println("Conexion");
+                        //stm.execute(sql);
+
+
+                        while (r.next()) {
+
+                            System.out.println("Metodo while");
+                            day = item.getDayOfMonth();
+                            month = item.getMonthValue();
+                            year = item.getYear();
+
+                            //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+
+                            if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                                Paint color = Color.RED;
+                                System.out.println("Metodo if");
+                                BackgroundFill fill = new BackgroundFill(color, null, null);
+                                this.setBackground(new Background(fill));
+                                this.setTextFill(Color.WHITESMOKE);
+
+
+                            }
+
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+
+
+
+
+
+                //if(es == 0) {
+
+
+                    //if 1
+               // }
+
+
+
+
+            }
+
+        };
+        Calendario.setDayCellFactory(dayCellFactory);
+
+    }
+
+
+    @FXML public void intentoCalendario() {
+
+        //fAgenda.getText().trim().length();
+        //System.out.println(fAgenda);
+        // this.setDisable(false);
+        //this.setBackground(null);
+        //this.setTextFill(Color.BLACK);
+        int day ;
+        int month;
+        int year;
+
+
+
+
+        try {
+            Connection c = ConexionBD.getConexion();
+            Statement stm = c.createStatement();
+            String sql = "SELECT fechaAgenda FROM datosusuario where fechaAgenda is not null";
+            ResultSet r = stm.executeQuery(sql);
+            System.out.println("Conexion");
+            //stm.execute(sql);
+
+            while(r.next()){
+                /*day = item.getDayOfMonth();
+                month = item.getMonthValue();
+                year = item.getYear();
+
+                 */
+                String imprimir = r.getString("fechaAgenda").split("-")[0];
+                String imprimir2 = r.getString("fechaAgenda").split("-")[1];
+                String imprimir3= r.getString("fechaAgenda").split("-")[2];
+                System.out.println(imprimir + " " + imprimir2 + " " + imprimir3);
+
+                //System.out.println(day + " " + month + " " + year);
+
+                day = Integer.parseInt(imprimir3);
+                month = Integer.parseInt(imprimir2);
+                year = Integer.parseInt(imprimir3);
+                //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+               /* if (imprimir == imprimir){
+                    Paint color = Color.RED;
+                    BackgroundFill fill = new BackgroundFill(color, null, null);
+
+                    this.setBackground(new Background(fill));
+                    this.setTextFill(Color.WHITESMOKE);
+
+                }
+
+                */
+
+                if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                    Paint color = Color.RED;
+                    System.out.println("Metodo if");
+                    BackgroundFill fill = new BackgroundFill(color, null, null);
+
+
+                    //this.setBackground(new Background(fill));
+                    //this.setTextFill(Color.WHITESMOKE);
+
+                }
+
+                //System.out.println(r.getString("fechaAgenda").split("-")[0]) && Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) &&  Integer.parseInt(r.getString("fechaAgenda").split("-")[2]));
+
+                //ESTE METODO ES PARA MARCAR LOS DIAS EN DATEPICKER DE LA BASE DE DATOS
+
+               /* if (year == Integer.parseInt(r.getString("fechaAgenda").split("-")[0]) && month == Integer.parseInt(r.getString("fechaAgenda").split("-")[1]) && day == Integer.parseInt(r.getString("fechaAgenda").split("-")[2])) {
+                    Paint color = Color.RED;
+                    System.out.println("Metodo if");
+                    BackgroundFill fill = new BackgroundFill(color, null, null);
+                    this.setBackground(new Background(fill));
+                    this.setTextFill(Color.WHITESMOKE);
+
+                }
+
+                */
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    };
+
+        /*int fila = Integer.parseInt(fAgenda.getText());
+        int i;
+
+        String valor = null;
+        for (i = 0; i < fila; i++) {
+            valor = (String) fAgenda.getText(i, 0);
+        }
+        String valores = valor + ", ";
+        JOptionPane.showMessageDialog(null, "valores de la columna1: " + valores);
+
+         */
+    }
+
+
+
 
 
 
@@ -1374,6 +1542,24 @@ public class HelloController {
         System.out.println("Password Emisor: "+passwordEmisorF);
         correoReceptorF =  deserializarObjeto("EstadoCorreoR.Dat", String.class);
         System.out.println("Correo Receptor: "+correoReceptorF);
+
+        try {
+            Stage stage = new Stage();//Crear una nueva ventana
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("exitoAdjuntar_Archivo.fxml"));
+            stage.setResizable(false);
+            Scene escena = new Scene(loader.load());
+            stage.setTitle("ERROR");
+            stage.setResizable(false);
+            stage.setScene(escena);//agregar la esena a la ventana
+            stage.showAndWait();
+            correoEmisor.setText("");
+            paswordEmisor.setText("");
+            correoReceptor.setText("");
+        } catch (Exception d){
+
+        }
+
+
 
 
     }

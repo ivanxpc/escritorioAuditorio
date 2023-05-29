@@ -192,6 +192,7 @@
                               <Button layoutX="941.0" layoutY="415.0" mnemonicParsing="false" onAction="#metodoGenerar_PDF" text="Agendar" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="415.0" />
                               <Label layoutX="94.0" layoutY="141.0" text="Seleciona la fecha de agenda: " AnchorPane.leftAnchor="94.0" AnchorPane.topAnchor="141.0" />
                               <Separator layoutX="231.0" layoutY="21.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="0.0" style="-fx-background-color: purple;" />
+                              <Button layoutX="167.0" layoutY="248.0" mnemonicParsing="false" onAction="#nuevoMetodoCal" text="Actualizar Calendario" />
                            </children>
                         </AnchorPane>
                      </items>
